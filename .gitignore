@@ -23,8 +23,7 @@ local.properties
 proguard/
 
 # Android Studio files
-/.idea/workspace.xml
-/.idea/libraries
+.idea/
 
 # Macs, ugh
 .DS_Store
