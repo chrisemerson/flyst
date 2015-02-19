@@ -1,28 +1,26 @@
-package uk.co.cemerson.flyst;
+package uk.co.cemerson.flyst.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 
-public class MainActivity extends ActionBarActivity
+import uk.co.cemerson.flyst.R;
+
+public class MainActivity extends FlystActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        getWindow().addFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-        );
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
+        setupTemporarySettingsButtons();
+    }
+
+    private void setupTemporarySettingsButtons()
+    {
         Button adbWifiButton = (Button) findViewById(R.id.adbwifi_button);
         adbWifiButton.setOnClickListener(new View.OnClickListener()
         {
