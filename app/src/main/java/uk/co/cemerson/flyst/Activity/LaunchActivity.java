@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import uk.co.cemerson.flyst.R;
 
-public class MainActivity extends FlystActivity
+public class LaunchActivity extends FlystActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

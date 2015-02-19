@@ -4,5 +4,8 @@
     <string name="app_name">Flyst</string>
     <string name="adb_wifi_button_text">ADB WiFi</string>
     <string name="main_settings_button_text">Settings</string>
+    <string name="fragment_launch_button_label">Go</string>
+    <string name="fragment_launch_label">Start Flying List For:</string>
+    <string name="menu_settings_text">Settings</string>
 
 </resources>
