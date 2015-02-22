@@ -12,10 +12,12 @@
         android:id="@+id/textView"
         android:layout_gravity="center"/>
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_launch_date_selector_button"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="<Today>"
+        android:id="@+id/dateTextView"
         android:layout_gravity="center"/>
 
     <Button
