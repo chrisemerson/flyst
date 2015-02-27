@@ -1,9 +1,10 @@
-package uk.co.cemerson.flyst.Activity;
+package uk.co.cemerson.flyst.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.WindowManager;
 
 import uk.co.cemerson.flyst.R;
@@ -34,5 +35,11 @@ public class FlystActivity extends ActionBarActivity
         menuInflater.inflate(R.menu.main, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        return super.onOptionsItemSelected(item);
     }
 }

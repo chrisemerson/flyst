@@ -1,4 +1,4 @@
-package uk.co.cemerson.flyst.Entity;
+package uk.co.cemerson.flyst.entity;
 
 import java.util.Date;
 

@@ -7,5 +7,6 @@
     <string name="fragment_launch_button_label">Go</string>
     <string name="fragment_launch_label">Start Flying List For:</string>
     <string name="menu_settings_text">Settings</string>
+    <string name="label_sunset">Sunset: </string>
 
 </resources>
