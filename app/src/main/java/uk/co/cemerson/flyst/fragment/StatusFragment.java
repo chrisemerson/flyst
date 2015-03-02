@@ -42,10 +42,19 @@ public class StatusFragment extends Fragment
     {
         final Date currentDate = new Date();
 
-        DateFormat dateFormat = new SimpleDateFormat("EEEE MMMM d, yyyy", Locale.ENGLISH);
-        DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+        DateFormat dateFormatter = new SimpleDateFormat("EEEE MMMM d, yyyy", Locale.ENGLISH);
+        DateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
-        long diffInMS = mSunsetTime.getTime() - currentDate.getTime();
+        String differenceString = getTimeToSunsetAsDifferenceString(currentDate);
+
+        mDateTextView.setText(dateFormatter.format(currentDate));
+        mTimeTextView.setText(timeFormatter.format(currentDate));
+        mSunsetTextView.setText(getResources().getString(R.string.label_sunset) + timeFormatter.format(mSunsetTime) + differenceString);
+    }
+
+    private String getTimeToSunsetAsDifferenceString(Date measureFrom)
+    {
+        long diffInMS = mSunsetTime.getTime() - measureFrom.getTime();
 
         String differenceString = "";
 
@@ -57,15 +66,21 @@ public class StatusFragment extends Fragment
             minutes -= hours * 60;
 
             if (hours > 0) {
-                differenceString += hours + "h ";
+                differenceString +=
+                    hours
+                        + getResources().getString(R.string.hour_indicator)
+                        + " ";
             }
 
-            differenceString += minutes + "m from now)";
+            differenceString +=
+                minutes
+                    + getResources().getString(R.string.minute_indicator)
+                    + " "
+                    + getResources().getString(R.string.label_from_now)
+                    + ")";
         }
 
-        mDateTextView.setText(dateFormat.format(currentDate));
-        mTimeTextView.setText(timeFormat.format(currentDate));
-        mSunsetTextView.setText(getResources().getString(R.string.label_sunset) + timeFormat.format(mSunsetTime) + differenceString);
+        return differenceString;
     }
 
     private void setupLayoutElements()
