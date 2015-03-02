@@ -1,6 +1,8 @@
 package uk.co.cemerson.flyst.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,14 +11,43 @@ import android.view.WindowManager;
 
 import uk.co.cemerson.flyst.R;
 
-public class FlystActivity extends ActionBarActivity
+abstract public class FlystBaseActivity extends ActionBarActivity
 {
+    private FragmentManager mFragmentManager;
+
+    protected abstract Fragment getActivityFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         setWindowOptions();
 
         super.onCreate(savedInstanceState);
+
+        setContentView(getViewID());
+
+        mFragmentManager = getSupportFragmentManager();
+
+        addFragment(R.id.activityFragmentContainer, getActivityFragment());
+    }
+
+    protected int getViewID()
+    {
+        return R.layout.activity_flyst_base;
+    }
+
+    protected void addFragment(int containerID, Fragment fragmentToAdd)
+    {
+        Fragment fragment = mFragmentManager.findFragmentById(containerID);
+
+        if (fragment == null) {
+            fragment = fragmentToAdd;
+
+            mFragmentManager
+                .beginTransaction()
+                .add(containerID, fragment)
+                .commit();
+        }
     }
 
     protected void setWindowOptions()

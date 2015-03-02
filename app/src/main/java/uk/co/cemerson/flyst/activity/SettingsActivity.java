@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 
 import uk.co.cemerson.flyst.fragment.SettingsFragment;
 
-public class SettingsActivity extends SingleFragmentFlystActivity
+public class SettingsActivity extends FlystBaseActivity
 {
     @Override
-    protected Fragment getFragment()
+    protected Fragment getActivityFragment()
     {
         return new SettingsFragment();
     }
