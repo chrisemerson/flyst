@@ -16,7 +16,7 @@ import java.util.Locale;
 import uk.co.cemerson.flyst.CranwellSunsetCalculator;
 import uk.co.cemerson.flyst.R;
 
-public class StatusFragment extends TimeTickRecievingFragment
+public class StatusFragment extends TimeTickReceivingFragment
 {
     private View mView;
 

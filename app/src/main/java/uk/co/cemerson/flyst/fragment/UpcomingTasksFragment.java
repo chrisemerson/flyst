@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import uk.co.cemerson.flyst.R;
 
-public class UpcomingTasksFragment extends TimeTickRecievingFragment
+public class UpcomingTasksFragment extends TimeTickReceivingFragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)

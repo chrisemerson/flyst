@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 
-abstract public class TimeTickRecievingFragment extends Fragment
+abstract public class TimeTickReceivingFragment extends Fragment
 {
     @Override
     public void onResume()
@@ -21,6 +21,7 @@ abstract public class TimeTickRecievingFragment extends Fragment
     public void onPause()
     {
         super.onPause();
+
         getActivity().unregisterReceiver(mTimeTickReceiver);
     }
 
