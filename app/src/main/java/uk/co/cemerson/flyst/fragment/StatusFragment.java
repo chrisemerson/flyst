@@ -2,7 +2,6 @@ package uk.co.cemerson.flyst.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,7 @@ import java.util.Locale;
 import uk.co.cemerson.flyst.CranwellSunsetCalculator;
 import uk.co.cemerson.flyst.R;
 
-public class StatusFragment extends Fragment
+public class StatusFragment extends TimeTickRecievingFragment
 {
     private View mView;
 
@@ -36,6 +35,12 @@ public class StatusFragment extends Fragment
         updateStatusTimes();
 
         return mView;
+    }
+
+    @Override
+    protected void onTimeTick()
+    {
+        updateStatusTimes();
     }
 
     public void updateStatusTimes()

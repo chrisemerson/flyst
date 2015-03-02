@@ -3,7 +3,7 @@ package uk.co.cemerson.flyst.activity;
 import android.os.Bundle;
 
 import uk.co.cemerson.flyst.R;
-import uk.co.cemerson.flyst.fragment.EventsFragment;
+import uk.co.cemerson.flyst.fragment.UpcomingTasksFragment;
 import uk.co.cemerson.flyst.fragment.StatusFragment;
 
 abstract public class FlystLayoutActivity extends FlystBaseActivity
@@ -14,7 +14,7 @@ abstract public class FlystLayoutActivity extends FlystBaseActivity
         super.onCreate(savedInstanceState);
 
         addFragment(R.id.statusFragmentContainer, new StatusFragment());
-        addFragment(R.id.eventsFragmentContainer, new EventsFragment());
+        addFragment(R.id.upcomingTasksFragmentContainer, new UpcomingTasksFragment());
     }
 
     @Override
