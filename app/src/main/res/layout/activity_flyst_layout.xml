@@ -2,12 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
     <FrameLayout
-        android:id="@+id/statusFragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingBottom="1dp"
+        android:background="#000000">
+        <FrameLayout
+            android:id="@+id/statusFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:background="#ffffff"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,11 +25,22 @@
             android:id="@+id/activityFragmentContainer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:padding="16dp"/>
+
+        <ImageButton
+            android:layout_width="84dp"
+            android:layout_height="match_parent"
+            android:background="#000000"
+            android:contentDescription="@string/label_see_upcoming_tasks"
+            android:src="@drawable/ic_launcher"/>
 
         <FrameLayout
             android:id="@+id/upcomingTasksFragmentContainer"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_width="500dp"
+            android:padding="16dp"
+            android:background="#dddddd"
+            android:visibility="gone"/>
     </LinearLayout>
 </LinearLayout>

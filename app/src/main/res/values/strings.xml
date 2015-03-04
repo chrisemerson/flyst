@@ -9,5 +9,6 @@
     <string name="label_from_now">from now</string>
     <string name="hour_indicator">h</string>
     <string name="minute_indicator">m</string>
+    <string name="label_see_upcoming_tasks">See upcoming tasks</string>
 
 </resources>
