@@ -31,9 +31,9 @@
         <ImageButton
             android:layout_width="84dp"
             android:layout_height="match_parent"
-            android:background="#1f1f1f"
             android:contentDescription="@string/label_see_upcoming_tasks"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_launcher"
+            android:background="#222222"/>
 
         <FrameLayout
             android:id="@+id/upcomingTasksFragmentContainer"
