@@ -29,11 +29,14 @@
             android:padding="16dp"/>
 
         <ImageButton
+            android:id="@+id/upcoming_events_slider_button"
             android:layout_width="84dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/label_see_upcoming_tasks"
-            android:src="@drawable/ic_launcher"
-            android:background="#222222"/>
+            android:src="@drawable/arrow_left"
+            android:background="#222222"
+            android:scaleType="fitCenter"
+            android:padding="20dp"/>
 
         <FrameLayout
             android:id="@+id/upcomingTasksFragmentContainer"
