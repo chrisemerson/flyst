@@ -2,17 +2,15 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/ActionBarStyle</item>
-        <!--<item name="item">@style/ActionBarMenuItemStyle</item>-->
     </style>
 
     <style name="ActionBarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="height">@dimen/action_bar_height</item>
-        <item name="background">@color/darkBar</item>
-        <item name="android:textSize">@dimen/action_bar_text_size</item>
-    </style>
-
-    <style name="ActionBarMenuItemStyle" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="height">@dimen/action_bar_height</item>
+        <item name="height">@dimen/clickable_bar_width</item>
+        <item name="background">@color/clickable_bar_background</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:color">#ffffff</item>
+        <item name="android:textSize">@dimen/clickable_bar_text_size</item>
+        <item name="actionMenuTextAppearance">@dimen/clickable_bar_text_size</item>
     </style>
 
 </resources>

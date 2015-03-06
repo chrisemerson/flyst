@@ -7,14 +7,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textColor="@color/status_other"
+        android:textSize="@dimen/status_other_text_size"
+        android:paddingTop="@dimen/status_other_padding_top"/>
 
     <TextView
         android:id="@+id/fragment_status_label_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_gravity="center_horizontal|top"/>
+        android:layout_gravity="center_horizontal|top"
+        android:textColor="@color/status_clock"
+        android:textSize="@dimen/status_clock_text_size"
+        android:layout_marginTop="@dimen/status_clock_margin_top"/>
 
     <TextView
         android:id="@+id/fragment_status_label_sunset"
@@ -22,5 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/label_sunset"
         android:layout_gravity="top|end"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textColor="@color/status_other"
+        android:textSize="@dimen/status_other_text_size"
+        android:paddingTop="@dimen/status_other_padding_top"/>
 </FrameLayout>

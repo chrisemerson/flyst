@@ -1,9 +1,12 @@
 <resources>
 
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="action_bar_height">84dp</dimen>
-    <dimen name="action_bar_text_size">100sp</dimen>
+    <dimen name="clickable_bar_width">84dp</dimen>
+    <dimen name="clickable_bar_text_size">24sp</dimen>
 
+    <dimen name="status_clock_text_size">50sp</dimen>
+    <dimen name="status_other_text_size">20sp</dimen>
+    <dimen name="status_clock_margin_top">-10dp</dimen>
+    <dimen name="status_other_padding_top">15dp</dimen>
+
+    <dimen name="main_title_text_size">30sp</dimen>
 </resources>

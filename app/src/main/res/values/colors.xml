@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="darkBar">#222222</color>
+    <color name="clickable_bar_background">#222222</color>
+    <color name="clickable_bar_text">#ffffff</color>
+
+    <color name="status_bar_background">#ffffff</color>
+    <color name="status_bar_underline">#000000</color>
+    <color name="status_clock">#000000</color>
+    <color name="status_other">#000000</color>
+
+    <color name="upcoming_tasks_background">#dddddd</color>
+
+    <color name="main_background">#dddddd</color>
+    <color name="main_title">#000000</color>
 </resources>

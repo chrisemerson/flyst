@@ -30,6 +30,7 @@ abstract public class FlystBaseActivity extends ActionBarActivity
         mFragmentManager = getSupportFragmentManager();
         addFragment(R.id.activityFragmentContainer, getActivityFragment());
 
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
         addBackButtonToActionBarIfActivityHasParentSet();
     }
 

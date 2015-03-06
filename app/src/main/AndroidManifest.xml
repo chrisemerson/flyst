@@ -10,7 +10,7 @@
 
         <activity
             android:name=".activity.DashboardActivity"
-            android:label="Flyst - Dashboar"
+            android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
 
         <activity
             android:name=".activity.SettingsActivity"
-            android:label="Flyst - Settings"
+            android:label="@string/menu_settings_text"
             android:screenOrientation="landscape">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity.DashboardActivity"/>
         </activity>

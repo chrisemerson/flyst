@@ -5,15 +5,15 @@
     android:orientation="vertical">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/clickable_bar_width"
         android:paddingBottom="1dp"
-        android:background="#000000">
+        android:background="@color/status_bar_underline">
         <FrameLayout
             android:id="@+id/statusFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
-            android:background="#ffffff"/>
+            android:background="@color/status_bar_background"/>
     </FrameLayout>
 
     <LinearLayout
@@ -26,15 +26,16 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            android:background="@color/main_background"/>
 
         <ImageButton
             android:id="@+id/upcoming_events_slider_button"
-            android:layout_width="84dp"
+            android:layout_width="@dimen/clickable_bar_width"
             android:layout_height="match_parent"
             android:contentDescription="@string/label_see_upcoming_tasks"
             android:src="@drawable/arrow_left"
-            android:background="#222222"
+            android:background="@color/clickable_bar_background"
             android:scaleType="fitCenter"
             android:padding="20dp"/>
 
@@ -43,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_width="500dp"
             android:padding="16dp"
-            android:background="#dddddd"
+            android:background="@color/upcoming_tasks_background"
             android:visibility="gone"/>
     </LinearLayout>
 </LinearLayout>
