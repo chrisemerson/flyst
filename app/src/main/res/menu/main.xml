@@ -7,5 +7,5 @@
         android:id="@+id/item_menu_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="@string/menu_settings_text"
-        app:showAsAction="ifRoom|withText"/>
+        app:showAsAction="always|withText"/>
 </menu>
