@@ -2,31 +2,16 @@
 
     <style name="FlystTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/Flyst.ActionBarStyle</item>
-        <item name="actionButtonStyle">@style/Flyst.ActionButtonStyle</item>
     </style>
 
     <style name="Flyst.ActionBarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="height">@dimen/clickable_bar_width</item>
         <item name="background">@color/clickable_bar_background</item>
         <item name="titleTextStyle">@style/Flyst.TitleTextStyle</item>
-
-        <!--<item name="android:height">@dimen/clickable_bar_width</item>-->
-        <!--<item name="android:padding">0dp</item>-->
-        <!--<item name="android:layout_margin">0dp</item>-->
     </style>
 
     <style name="Flyst.TitleTextStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textSize">@dimen/clickable_bar_text_size</item>
-    </style>
-
-    <style name="Flyst.ActionButtonStyle" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!--<item name="height">@dimen/clickable_bar_width</item>-->
-
-        <!--<item name="android:textSize">@dimen/clickable_bar_text_size</item>-->
-        <!--<item name="android:textStyle">normal</item>-->
-        <!--<item name="android:layout_marginTop">25dp</item>-->
-        <!--<item name="android:paddingLeft">10dp</item>-->
-        <!--<item name="android:paddingRight">10dp</item>-->
     </style>
 
 </resources>
