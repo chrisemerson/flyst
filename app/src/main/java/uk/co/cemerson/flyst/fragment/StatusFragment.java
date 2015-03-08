@@ -47,6 +47,7 @@ public class StatusFragment extends TimeTickReceivingFragment
     {
         final Date currentDate = new Date();
 
+        DateFormat machineReadableDateFormatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
         DateFormat dateFormatter = new SimpleDateFormat("EEEE MMMM d, yyyy", Locale.ENGLISH);
         DateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 
@@ -54,6 +55,11 @@ public class StatusFragment extends TimeTickReceivingFragment
 
         mDateTextView.setText(dateFormatter.format(currentDate));
         mTimeTextView.setText(timeFormatter.format(currentDate));
+
+        if (machineReadableDateFormatter.format(currentDate).equals(machineReadableDateFormatter.format(mSunsetTime))) {
+            initSunsetTime();
+        }
+
         mSunsetTextView.setText(getResources().getString(R.string.label_sunset) + timeFormatter.format(mSunsetTime) + differenceString);
     }
 
@@ -66,7 +72,7 @@ public class StatusFragment extends TimeTickReceivingFragment
         if (diffInMS > 0) {
             differenceString += " (";
 
-            int minutes = (int) Math.ceil((double) (diffInMS / 60000)) + 1;
+            int minutes = (int) Math.floor((double) (diffInMS / 60000));
             int hours = (int) Math.floor(minutes / 60);
             minutes -= hours * 60;
 
@@ -78,7 +84,7 @@ public class StatusFragment extends TimeTickReceivingFragment
             }
 
             differenceString +=
-                minutes
+                String.format("%02d", minutes)
                     + getResources().getString(R.string.minute_indicator)
                     + " "
                     + getResources().getString(R.string.label_from_now)
