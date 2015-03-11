@@ -1,5 +1,7 @@
 <resources>
 
+    <dimen name="upcoming_tasks_panel_width">800dp</dimen>
+
     <dimen name="clickable_bar_width">84dp</dimen>
     <dimen name="clickable_bar_text_size">35sp</dimen>
 

@@ -16,35 +16,38 @@
             android:background="@color/status_bar_background"/>
     </FrameLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
         <FrameLayout
             android:id="@+id/activityFragmentContainer"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:padding="16dp"
             android:background="@color/main_background"/>
 
-        <ImageButton
-            android:id="@+id/upcoming_events_slider_button"
-            android:layout_width="@dimen/clickable_bar_width"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/label_see_upcoming_tasks"
-            android:src="@drawable/arrow_left"
-            android:background="@color/clickable_bar_background"
-            android:scaleType="fitCenter"
-            android:padding="20dp"/>
+            <LinearLayout
+                android:id="@+id/upcomingTasksSlidingPanel"
+                android:orientation="horizontal"
+                android:layout_width="@dimen/upcoming_tasks_panel_width"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@id/activityFragmentContainer"
+                android:layout_alignRight="@id/activityFragmentContainer"
+                android:background="@color/upcoming_tasks_background">
+                <ImageButton
+                    android:id="@+id/upcoming_events_slider_button"
+                    android:layout_width="@dimen/clickable_bar_width"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/label_see_upcoming_tasks"
+                    android:src="@drawable/arrow_left"
+                    android:background="@color/clickable_bar_background"
+                    android:scaleType="fitCenter"
+                    android:padding="20dp"/>
 
-        <FrameLayout
-            android:id="@+id/upcomingTasksFragmentContainer"
-            android:layout_height="match_parent"
-            android:layout_width="500dp"
-            android:padding="16dp"
-            android:background="@color/upcoming_tasks_background"
-            android:visibility="gone"/>
-    </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/upcomingTasksFragmentContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
