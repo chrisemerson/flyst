@@ -56,7 +56,7 @@ public class StatusFragment extends TimeTickReceivingFragment
         mDateTextView.setText(dateFormatter.format(currentDate));
         mTimeTextView.setText(timeFormatter.format(currentDate));
 
-        if (machineReadableDateFormatter.format(currentDate).equals(machineReadableDateFormatter.format(mSunsetTime))) {
+        if (!machineReadableDateFormatter.format(currentDate).equals(machineReadableDateFormatter.format(mSunsetTime))) {
             initSunsetTime();
         }
 
