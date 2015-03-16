@@ -21,7 +21,7 @@ public class UpcomingTasksFragment extends TimeTickReceivingFragment
 
     public interface UpcomingTasksCallbackListener
     {
-        abstract public void newEvents();
+        abstract public void newTasks();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class UpcomingTasksFragment extends TimeTickReceivingFragment
     {
         if (callbackListener != null) {
             //Call new events for testing, just for the hell of it
-            callbackListener.newEvents();
+            callbackListener.newTasks();
         }
     }
 

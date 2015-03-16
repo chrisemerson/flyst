@@ -14,6 +14,9 @@ import uk.co.cemerson.flyst.fragment.UpcomingTasksFragment;
 abstract public class FlystLayoutActivity extends FlystBaseActivity implements
     UpcomingTasksFragment.UpcomingTasksCallbackListener
 {
+    private boolean upcomingTasksPanelIsShown;
+    private ImageButton mUpcomingTasksSliderButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -27,16 +30,30 @@ abstract public class FlystLayoutActivity extends FlystBaseActivity implements
 
     private void initialiseUpcomingTasksFragmentLayout()
     {
-        initUpcomingTasksSlidingPanelLayoutParams();
-        initUpcomingEventsSliderClickListener();
+        setUpcomingTasksSlidingPanelLayoutParams(getUpcomingTasksSlidingPanelRequiredOffset(), false);
+        initUpcomingTasksSliderClickListener();
+
+        upcomingTasksPanelIsShown = false;
     }
 
-    private void initUpcomingTasksSlidingPanelLayoutParams()
+    private void hideUpcomingTasksPanel()
+    {
+        setUpcomingTasksSlidingPanelLayoutParams(getUpcomingTasksSlidingPanelRequiredOffset(), true);
+        mUpcomingTasksSliderButton.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left));
+    }
+
+    private void showUpcomingTasksPanel()
+    {
+        setUpcomingTasksSlidingPanelLayoutParams(0, true);
+        mUpcomingTasksSliderButton.setImageDrawable(getResources().getDrawable(R.drawable.arrow_right));
+    }
+
+    private void setUpcomingTasksSlidingPanelLayoutParams(int offset, boolean animate)
     {
         LinearLayout upcomingTasksSlidingPanel = (LinearLayout) findViewById(R.id.upcomingTasksSlidingPanel);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) upcomingTasksSlidingPanel.getLayoutParams();
 
-        params.setMargins(0, 0, getUpcomingTasksSlidingPanelRequiredOffset(), 0);
+        params.setMargins(0, 0, offset, 0);
 
         upcomingTasksSlidingPanel.setLayoutParams(params);
     }
@@ -51,22 +68,28 @@ abstract public class FlystLayoutActivity extends FlystBaseActivity implements
         return 0 - Math.round(upcomingTasksOffsetInDIP * scale);
     }
 
-    private void initUpcomingEventsSliderClickListener()
+    private void initUpcomingTasksSliderClickListener()
     {
-        ImageButton upcomingEventsSliderButton = (ImageButton) findViewById(R.id.upcoming_events_slider_button);
+        mUpcomingTasksSliderButton = (ImageButton) findViewById(R.id.upcoming_events_slider_button);
 
-        upcomingEventsSliderButton.setOnClickListener(new View.OnClickListener()
+        mUpcomingTasksSliderButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //Toggle UpcomingTasks sliding panel here...
+                if (upcomingTasksPanelIsShown) {
+                    hideUpcomingTasksPanel();
+                    upcomingTasksPanelIsShown = false;
+                } else {
+                    showUpcomingTasksPanel();
+                    upcomingTasksPanelIsShown = true;
+                }
             }
         });
     }
 
     @Override
-    public void newEvents()
+    public void newTasks()
     {
         //Flash upcoming tasks button
     }
