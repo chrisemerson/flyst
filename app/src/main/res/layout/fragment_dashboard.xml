@@ -49,6 +49,7 @@
         android:paddingBottom="16dp"
         android:background="@color/highlight_background">
         <Button
+            android:id="@+id/dashboard_button_flying_list"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Flying List"
@@ -65,6 +66,7 @@
             android:background="@color/highlight_text"/>
 
         <Button
+            android:id="@+id/dashboard_button_gliders"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Gliders"
@@ -81,6 +83,7 @@
             android:background="@color/highlight_text"/>
 
         <Button
+            android:id="@+id/dashboard_button_winch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Winch"
@@ -97,6 +100,7 @@
             android:background="@color/highlight_text"/>
 
         <Button
+            android:id="@+id/dashboard_button_retrieves"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="Retrieve(s)"
