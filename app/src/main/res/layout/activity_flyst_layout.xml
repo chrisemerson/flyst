@@ -23,7 +23,7 @@
             android:id="@+id/activityFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
+            android:paddingRight="@dimen/clickable_bar_width"
             android:background="@color/main_background"/>
 
             <LinearLayout

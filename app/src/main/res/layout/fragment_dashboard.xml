@@ -9,5 +9,100 @@
         android:textSize="@dimen/main_title_text_size"
         android:textColor="@color/main_title"
         android:text="@string/title_dashboard"
-        android:id="@+id/textView"/>
+        android:id="@+id/textView"
+        android:padding="16dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:padding="16dp">
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/flyingListPilotsFlownProgressBar"
+            android:layout_alignParentBottom="true"
+            android:progress="5"
+            android:max="32"
+            android:progressTint="@color/clickable_bar_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilots on Flying List flown: 5/32"
+            android:id="@+id/flyingListPilotsFlownText"
+            android:layout_above="@id/flyingListPilotsFlownProgressBar"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/basic_text_size"
+            android:textColor="@color/basic_text"
+            android:layout_marginBottom="8dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:background="@color/highlight_background">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Flying List"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="bottom|center"
+            android:textColor="@color/highlight_text"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="@color/highlight_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Gliders"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="bottom|center"
+            android:textColor="@color/highlight_text"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="@color/highlight_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Winch"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="bottom|center"
+            android:textColor="@color/highlight_text"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="@color/highlight_text"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Retrieve(s)"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:gravity="bottom|center"
+            android:textColor="@color/highlight_text"/>
+    </LinearLayout>
 </LinearLayout>

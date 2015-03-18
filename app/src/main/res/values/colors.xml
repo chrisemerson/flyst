@@ -6,9 +6,13 @@
     <color name="status_bar_background">#ffffff</color>
     <color name="status_bar_underline">#000000</color>
     <color name="status_clock">#000000</color>
-    <color name="status_other">#000000</color>
+
+    <color name="basic_text">#000000</color>
 
     <color name="upcoming_tasks_background">#bbbbbb</color>
+
+    <color name="highlight_background">#666666</color>
+    <color name="highlight_text">#ffffff</color>
 
     <color name="main_background">#dddddd</color>
     <color name="main_title">#000000</color>

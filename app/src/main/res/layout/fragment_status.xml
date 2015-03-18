@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
@@ -7,9 +7,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|start"
-        android:textColor="@color/status_other"
-        android:textSize="@dimen/status_other_text_size"
-        android:paddingTop="@dimen/status_other_padding_top"/>
+        android:textColor="@color/basic_text"
+        android:textSize="@dimen/basic_text_size"
+        android:paddingTop="@dimen/status_other_padding_top"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"/>
 
     <TextView
         android:id="@+id/fragment_status_label_time"
@@ -18,15 +20,27 @@
         android:layout_gravity="center_horizontal|top"
         android:textColor="@color/status_clock"
         android:textSize="@dimen/status_clock_text_size"
-        android:layout_marginTop="@dimen/status_clock_margin_top"/>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
-        android:id="@+id/fragment_status_label_sunset"
+        android:id="@+id/fragment_status_sunset_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_sunset"
         android:layout_gravity="top|end"
-        android:textColor="@color/status_other"
-        android:textSize="@dimen/status_other_text_size"
-        android:paddingTop="@dimen/status_other_padding_top"/>
-</FrameLayout>
+        android:textColor="@color/basic_text"
+        android:textSize="@dimen/basic_text_size"
+        android:paddingTop="@dimen/status_other_padding_top"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+
+    <ImageView
+        android:layout_width="@dimen/sunset_icon_size"
+        android:layout_height="@dimen/sunset_icon_size"
+        android:id="@+id/imageView"
+        android:src="@drawable/sunset_logo"
+        android:scaleType="centerInside"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="6dp"
+        android:layout_toLeftOf="@id/fragment_status_sunset_text"/>
+</RelativeLayout>

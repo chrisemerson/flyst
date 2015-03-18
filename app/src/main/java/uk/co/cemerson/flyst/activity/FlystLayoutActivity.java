@@ -3,8 +3,6 @@ package uk.co.cemerson.flyst.activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,8 +14,6 @@ import uk.co.cemerson.flyst.fragment.UpcomingTasksFragment;
 abstract public class FlystLayoutActivity extends FlystBaseActivity implements
     UpcomingTasksFragment.UpcomingTasksCallbackListener
 {
-    public static final int UPCOMING_TASKS_SLIDE_ANIMATION_DURATION_MILLIS = 500;
-
     private boolean upcomingTasksPanelIsShown;
 
     private ImageButton mUpcomingTasksSliderButton;
@@ -43,13 +39,13 @@ abstract public class FlystLayoutActivity extends FlystBaseActivity implements
 
     private void hideUpcomingTasksPanel()
     {
-        animateUpcomingTasksSlidingPanelLayoutParams(getUpcomingTasksSlidingPanelRequiredOffset());
+        setUpcomingTasksSlidingPanelLayoutParams(getUpcomingTasksSlidingPanelRequiredOffset());
         mUpcomingTasksSliderButton.setImageDrawable(getResources().getDrawable(R.drawable.arrow_left));
     }
 
     private void showUpcomingTasksPanel()
     {
-        animateUpcomingTasksSlidingPanelLayoutParams(0);
+        setUpcomingTasksSlidingPanelLayoutParams(0);
         mUpcomingTasksSliderButton.setImageDrawable(getResources().getDrawable(R.drawable.arrow_right));
     }
 
@@ -61,27 +57,6 @@ abstract public class FlystLayoutActivity extends FlystBaseActivity implements
         params.rightMargin = offset;
 
         upcomingTasksSlidingPanel.setLayoutParams(params);
-    }
-
-    private void animateUpcomingTasksSlidingPanelLayoutParams(final int finalOffset)
-    {
-        final LinearLayout upcomingTasksSlidingPanel = (LinearLayout) findViewById(R.id.upcomingTasksSlidingPanel);
-        final RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) upcomingTasksSlidingPanel.getLayoutParams();
-
-        final int initialOffset = params.rightMargin;
-
-        Animation a = new Animation()
-        {
-            @Override
-            protected void applyTransformation(float interpolatedTime, Transformation t)
-            {
-                params.rightMargin = (int)(initialOffset + ((finalOffset - initialOffset) * interpolatedTime));
-                upcomingTasksSlidingPanel.setLayoutParams(params);
-            }
-        };
-
-        a.setDuration(UPCOMING_TASKS_SLIDE_ANIMATION_DURATION_MILLIS);
-        upcomingTasksSlidingPanel.startAnimation(a);
     }
 
     private int getUpcomingTasksSlidingPanelRequiredOffset()

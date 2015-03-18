@@ -57,12 +57,7 @@ public class StatusFragment extends TimeTickReceivingFragment
 
         mDateTextView.setText(dateFormatter.format(currentDate));
         mTimeTextView.setText(timeFormatter.format(currentDate));
-        mSunsetTextView.setText(
-            getResources().getString(R.string.label_sunset)
-                + " "
-                + timeFormatter.format(mSunsetTime)
-                + getTimeToSunsetAsDifferenceString(currentDate)
-        );
+        mSunsetTextView.setText(timeFormatter.format(mSunsetTime) + getTimeToSunsetAsDifferenceString(currentDate));
     }
 
     private String getTimeToSunsetAsDifferenceString(Date measureFrom)
@@ -99,7 +94,7 @@ public class StatusFragment extends TimeTickReceivingFragment
     private void setupLayoutElements()
     {
         mDateTextView = (TextView) mView.findViewById(R.id.fragment_status_label_date);
-        mSunsetTextView = (TextView) mView.findViewById(R.id.fragment_status_label_sunset);
+        mSunsetTextView = (TextView) mView.findViewById(R.id.fragment_status_sunset_text);
         mTimeTextView = (TextView) mView.findViewById(R.id.fragment_status_label_time);
 
         if (mSunsetTime == null) {
