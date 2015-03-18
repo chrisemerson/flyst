@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import uk.co.cemerson.flyst.R;
 
@@ -71,19 +72,23 @@ public class DashboardFragment extends Fragment
         });
     }
 
-    private void startRetrievesActivity()
+    private void startFlyingListActivity()
     {
-    }
-
-    private void startWinchActivity()
-    {
+        Toast.makeText(getActivity().getApplicationContext(), "Flying List", Toast.LENGTH_SHORT).show();
     }
 
     private void startGlidersActivity()
     {
+        Toast.makeText(getActivity().getApplicationContext(), "Gliders", Toast.LENGTH_SHORT).show();
     }
 
-    private void startFlyingListActivity()
+    private void startWinchActivity()
     {
+        Toast.makeText(getActivity().getApplicationContext(), "Winch", Toast.LENGTH_SHORT).show();
+    }
+
+    private void startRetrievesActivity()
+    {
+        Toast.makeText(getActivity().getApplicationContext(), "Retrieve(s)", Toast.LENGTH_SHORT).show();
     }
 }
