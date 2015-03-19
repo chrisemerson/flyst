@@ -1,5 +1,6 @@
 package uk.co.cemerson.flyst.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import uk.co.cemerson.flyst.R;
+import uk.co.cemerson.flyst.activity.FlyingListActivity;
+import uk.co.cemerson.flyst.activity.GlidersActivity;
+import uk.co.cemerson.flyst.activity.RetrievesActivity;
+import uk.co.cemerson.flyst.activity.WinchActivity;
 
 public class DashboardFragment extends Fragment
 {
@@ -74,21 +78,27 @@ public class DashboardFragment extends Fragment
 
     private void startFlyingListActivity()
     {
-        Toast.makeText(getActivity().getApplicationContext(), "Flying List", Toast.LENGTH_SHORT).show();
+        startActivityFromClassName(FlyingListActivity.class);
     }
 
     private void startGlidersActivity()
     {
-        Toast.makeText(getActivity().getApplicationContext(), "Gliders", Toast.LENGTH_SHORT).show();
+        startActivityFromClassName(GlidersActivity.class);
     }
 
     private void startWinchActivity()
     {
-        Toast.makeText(getActivity().getApplicationContext(), "Winch", Toast.LENGTH_SHORT).show();
+        startActivityFromClassName(WinchActivity.class);
     }
 
     private void startRetrievesActivity()
     {
-        Toast.makeText(getActivity().getApplicationContext(), "Retrieve(s)", Toast.LENGTH_SHORT).show();
+        startActivityFromClassName(RetrievesActivity.class);
+    }
+
+    private void startActivityFromClassName(Class<?> activityToStart)
+    {
+        Intent i = new Intent(getActivity().getApplicationContext(), activityToStart);
+        startActivity(i);
     }
 }

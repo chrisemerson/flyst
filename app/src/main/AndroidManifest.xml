@@ -22,8 +22,36 @@
         </activity>
 
         <activity
+            android:name=".activity.FlyingListActivity"
+            android:label="@string/activity_name_flyinglist"
+            android:screenOrientation="landscape">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity.DashboardActivity"/>
+        </activity>
+
+        <activity
+            android:name=".activity.GlidersActivity"
+            android:label="@string/activity_name_gliders"
+            android:screenOrientation="landscape">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity.DashboardActivity"/>
+        </activity>
+
+        <activity
+            android:name=".activity.WinchActivity"
+            android:label="@string/activity_name_winch"
+            android:screenOrientation="landscape">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity.DashboardActivity"/>
+        </activity>
+
+        <activity
+            android:name=".activity.RetrievesActivity"
+            android:label="@string/activity_name_retrieves"
+            android:screenOrientation="landscape">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity.DashboardActivity"/>
+        </activity>
+
+        <activity
             android:name=".activity.SettingsActivity"
-            android:label="@string/menu_settings_text"
+            android:label="@string/activity_name_settings"
             android:screenOrientation="landscape">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity.DashboardActivity"/>
         </activity>

@@ -12,4 +12,10 @@
     <string name="label_see_upcoming_tasks">See upcoming tasks</string>
     <string name="title_dashboard">Dashboard</string>
 
+    <string name="activity_name_flyinglist">Flying List</string>
+    <string name="activity_name_gliders">Gliders</string>
+    <string name="activity_name_winch">Winch</string>
+    <string name="activity_name_retrieves">Retrieve(s)</string>
+    <string name="activity_name_settings">Settings</string>
+
 </resources>
