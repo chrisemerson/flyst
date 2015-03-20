@@ -36,6 +36,12 @@ public class DashboardFragment extends FlystFragment
         return v;
     }
 
+    @Override
+    public void onFlyingListUpdate()
+    {
+
+    }
+
     private void addButtonListeners()
     {
         mFlyingListButton.setOnClickListener(new View.OnClickListener()

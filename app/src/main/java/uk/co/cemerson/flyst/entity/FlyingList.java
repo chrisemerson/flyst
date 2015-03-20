@@ -10,8 +10,10 @@ public class FlyingList
 
     private Date mFlyingListDate;
 
-    private List<Pilot> mPilots;
-    private List<Glider> mGliders;
+    private List<Pilot> mPilots = new ArrayList<>();
+    private List<Glider> mGliders = new ArrayList<>();
+
+    private List<FlyingListUpdateReceiver> mUpdateReceivers = new ArrayList<>();
 
     private FlyingList(Date flyingListDate)
     {
@@ -40,7 +42,7 @@ public class FlyingList
 
     public void addPilot(Pilot member)
     {
-
+        updateReceivers();
     }
 
     public List<Pilot> getPilots()
@@ -50,7 +52,7 @@ public class FlyingList
 
     public void addGlider(Glider glider)
     {
-
+        updateReceivers();
     }
 
     public List<Glider> getGliders()
@@ -74,5 +76,27 @@ public class FlyingList
         }
 
         return numberOfPilotsFlown;
+    }
+
+    public void attachUpdateReceiver(FlyingListUpdateReceiver updateReceiver)
+    {
+        mUpdateReceivers.add(updateReceiver);
+    }
+
+    public void detachUpdateReceiver(FlyingListUpdateReceiver updateReceiver)
+    {
+        mUpdateReceivers.remove(updateReceiver);
+    }
+
+    public void updateReceivers()
+    {
+        for (FlyingListUpdateReceiver receiver : mUpdateReceivers) {
+            receiver.onFlyingListUpdate();
+        }
+    }
+
+    public interface FlyingListUpdateReceiver
+    {
+        public void onFlyingListUpdate();
     }
 }

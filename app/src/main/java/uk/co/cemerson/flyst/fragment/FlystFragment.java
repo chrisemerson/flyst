@@ -8,7 +8,7 @@ import java.util.Date;
 import uk.co.cemerson.flyst.entity.FlyingList;
 import uk.co.cemerson.flyst.repository.MemberRepository;
 
-abstract public class FlystFragment extends Fragment
+abstract public class FlystFragment extends Fragment implements FlyingList.FlyingListUpdateReceiver
 {
     protected MemberRepository mMemberRepository;
     protected FlyingList mFlyingList;
@@ -19,6 +19,7 @@ abstract public class FlystFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         mFlyingList = FlyingList.getInstance(new Date());
+        mFlyingList.attachUpdateReceiver(this);
         mMemberRepository = new MemberRepository();
     }
 
@@ -28,6 +29,7 @@ abstract public class FlystFragment extends Fragment
         super.onDestroy();
 
         mFlyingList.save();
+        mFlyingList.detachUpdateReceiver(this);
         mFlyingList = null;
 
         mMemberRepository = null;
