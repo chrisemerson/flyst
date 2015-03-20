@@ -3,19 +3,18 @@ package uk.co.cemerson.flyst.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import uk.co.cemerson.flyst.R;
-import uk.co.cemerson.flyst.activity.PilotsActivity;
 import uk.co.cemerson.flyst.activity.GlidersActivity;
+import uk.co.cemerson.flyst.activity.PilotsActivity;
 import uk.co.cemerson.flyst.activity.RetrievesActivity;
 import uk.co.cemerson.flyst.activity.WinchActivity;
 
-public class DashboardFragment extends Fragment
+public class DashboardFragment extends FlystFragment
 {
     private Button mFlyingListButton;
     private Button mGlidersButton;

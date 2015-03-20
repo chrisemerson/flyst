@@ -9,13 +9,13 @@ import java.util.GregorianCalendar;
 
 public class CranwellSunsetCalculator extends SunriseSunsetCalculator
 {
-    private static final String CranwellTimezone = "Europe/London";
-    private static final String CranwellLatitude = "53.041961";
-    private static final String CranwellLongitude = "-0.492393";
+    private static final String CRANWELL_TIMEZONE = "Europe/London";
+    private static final String CRANWELL_LATITUDE = "53.041961";
+    private static final String CRANWELL_LONGITUDE = "-0.492393";
 
     public CranwellSunsetCalculator()
     {
-        super(new Location(CranwellLatitude, CranwellLongitude), CranwellTimezone);
+        super(new Location(CRANWELL_LATITUDE, CRANWELL_LONGITUDE), CRANWELL_TIMEZONE);
     }
 
     public String getOfficialSunsetForDate(Date date)
