@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import uk.co.cemerson.flyst.CranwellSunsetCalculator;
+import uk.co.cemerson.flyst.sunset.CranwellSunsetCalculator;
 import uk.co.cemerson.flyst.R;
 
 public class StatusFragment extends TimeTickReceivingFragment

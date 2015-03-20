@@ -2,13 +2,21 @@ package uk.co.cemerson.flyst.entity;
 
 import java.util.UUID;
 
-public class Member
+import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
+
+public class Member implements SimpleFuzzySearchable
 {
     private UUID id;
     private String mFirstName;
     private String mSurname;
     private boolean mIsWinchDriver;
     private boolean mIsRetrieveDriver;
+
+    public Member (String firstName, String surname)
+    {
+        setFirstName(firstName);
+        setSurname(surname);
+    }
 
     public UUID getId()
     {
@@ -18,6 +26,12 @@ public class Member
     public void setId(UUID id)
     {
         this.id = id;
+    }
+
+    @Override
+    public String getSearchableTerm()
+    {
+        return getFirstName() + " " + getSurname();
     }
 
     public String getFirstName()
