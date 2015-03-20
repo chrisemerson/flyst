@@ -22,15 +22,15 @@
             android:id="@+id/memberSearchBox"
             android:layout_gravity="center_horizontal"
             android:hint="@string/pilot_search_box_hint"
-            android:drawableLeft="@android:drawable/ic_menu_search"
-            />
+            android:drawableLeft="@android:drawable/ic_menu_search"/>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/memberSearchBox"
             android:id="@+id/pilotsAutocompleteView"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"/>
 
         <ListView
             android:layout_width="match_parent"
