@@ -51,13 +51,13 @@ public class DashboardFragment extends FlystFragment
 
     private void addButtonListeners()
     {
-        addClickListener(mPilotsButton, PilotsActivity.class);
-        addClickListener(mGlidersButton, GlidersActivity.class);
-        addClickListener(mWinchButton, WinchActivity.class);
-        addClickListener(mRetrievesButton, RetrievesActivity.class);
+        addClickListenerToLaunchActivity(mPilotsButton, PilotsActivity.class);
+        addClickListenerToLaunchActivity(mGlidersButton, GlidersActivity.class);
+        addClickListenerToLaunchActivity(mWinchButton, WinchActivity.class);
+        addClickListenerToLaunchActivity(mRetrievesButton, RetrievesActivity.class);
     }
 
-    private void addClickListener(View viewToAddListenerTo, final Class activityToStart)
+    private void addClickListenerToLaunchActivity(View viewToAddListenerTo, final Class activityToStart)
     {
         viewToAddListenerTo.setOnClickListener(new View.OnClickListener()
         {
