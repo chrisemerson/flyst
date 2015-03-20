@@ -15,4 +15,10 @@ public class PilotsFragment extends FlystFragment
     {
         return inflater.inflate(R.layout.fragment_pilots, container, false);
     }
+
+    @Override
+    public void onFlyingListUpdate()
+    {
+        //Load stats and information from flying list here
+    }
 }

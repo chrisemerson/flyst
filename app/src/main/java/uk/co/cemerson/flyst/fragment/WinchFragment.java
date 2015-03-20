@@ -15,4 +15,10 @@ public class WinchFragment extends FlystFragment
     {
         return inflater.inflate(R.layout.fragment_winch, container, false);
     }
+
+    @Override
+    public void onFlyingListUpdate()
+    {
+        //Load stats and information from flying list here
+    }
 }
