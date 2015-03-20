@@ -22,8 +22,8 @@
         </activity>
 
         <activity
-            android:name=".activity.FlyingListActivity"
-            android:label="@string/activity_name_flyinglist"
+            android:name=".activity.PilotsActivity"
+            android:label="@string/activity_name_pilots"
             android:screenOrientation="landscape">
             <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".activity.DashboardActivity"/>
         </activity>

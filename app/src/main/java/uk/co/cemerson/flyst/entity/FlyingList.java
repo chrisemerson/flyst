@@ -21,10 +21,21 @@ public class FlyingList
     public static FlyingList getInstance(Date flyingListDate)
     {
         if (instance == null) {
-            instance = new FlyingList(flyingListDate);
+            instance = load(flyingListDate);
         }
 
         return instance;
+    }
+
+    private static FlyingList load(Date flyingListDate)
+    {
+        //Load from file system if flying list exists for this date
+        return new FlyingList(flyingListDate);
+    }
+
+    public void save()
+    {
+        //Save flying list to file system
     }
 
     public void addPilot(Pilot member)
@@ -32,7 +43,7 @@ public class FlyingList
 
     }
 
-    public List<Pilot> getMembers()
+    public List<Pilot> getPilots()
     {
         return new ArrayList<Pilot>();
     }

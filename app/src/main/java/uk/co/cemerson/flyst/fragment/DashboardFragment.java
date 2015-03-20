@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import uk.co.cemerson.flyst.R;
-import uk.co.cemerson.flyst.activity.FlyingListActivity;
+import uk.co.cemerson.flyst.activity.PilotsActivity;
 import uk.co.cemerson.flyst.activity.GlidersActivity;
 import uk.co.cemerson.flyst.activity.RetrievesActivity;
 import uk.co.cemerson.flyst.activity.WinchActivity;
@@ -78,7 +78,7 @@ public class DashboardFragment extends Fragment
 
     private void startFlyingListActivity()
     {
-        startActivityFromClassName(FlyingListActivity.class);
+        startActivityFromClassName(PilotsActivity.class);
     }
 
     private void startGlidersActivity()
