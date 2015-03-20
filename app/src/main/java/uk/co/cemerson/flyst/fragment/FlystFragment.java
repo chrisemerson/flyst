@@ -20,6 +20,8 @@ abstract public class FlystFragment extends Fragment implements FlyingList.Flyin
 
         mFlyingList = FlyingList.getInstance(new Date());
         mFlyingList.attachUpdateReceiver(this);
+        onFlyingListUpdate();
+
         mMemberRepository = new MemberRepository();
     }
 

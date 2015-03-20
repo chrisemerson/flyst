@@ -39,7 +39,7 @@ public class DashboardFragment extends FlystFragment
     @Override
     public void onFlyingListUpdate()
     {
-
+        //Load stats and information from flying list here
     }
 
     private void addButtonListeners()
