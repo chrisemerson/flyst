@@ -1,6 +1,8 @@
 package uk.co.cemerson.flyst.entity;
 
-public class Glider
+import java.util.Observable;
+
+public class Glider extends Observable
 {
     private String mRegistration;
     private String mType;

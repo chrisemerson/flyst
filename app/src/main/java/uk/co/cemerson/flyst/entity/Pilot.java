@@ -1,6 +1,8 @@
 package uk.co.cemerson.flyst.entity;
 
-public class Pilot
+import java.util.Observable;
+
+public class Pilot extends Observable
 {
     private Member mMember;
     private boolean mHasFlown;

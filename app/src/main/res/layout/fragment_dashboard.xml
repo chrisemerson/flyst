@@ -22,18 +22,17 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/flyingListPilotsFlownProgressBar"
+            android:id="@+id/flying_list_pilots_flown_progress_bar"
             android:layout_alignParentBottom="true"
-            android:progress="5"
-            android:max="32"
-            android:progressTint="@color/clickable_bar_background" />
+            android:progress="0"
+            android:max="0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pilots on Flying List flown: 5/32"
-            android:id="@+id/flyingListPilotsFlownText"
-            android:layout_above="@id/flyingListPilotsFlownProgressBar"
+            android:text="@string/label_dashboard_no_pilots_on_list"
+            android:id="@+id/flying_list_pilots_flown_label"
+            android:layout_above="@id/flying_list_pilots_flown_progress_bar"
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/basic_text_size"
             android:textColor="@color/basic_text"
@@ -49,7 +48,7 @@
         android:paddingBottom="16dp"
         android:background="@color/highlight_background">
         <Button
-            android:id="@+id/dashboard_button_flying_list"
+            android:id="@+id/dashboard_button_pilots"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="@string/activity_name_pilots"
