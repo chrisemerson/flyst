@@ -3,8 +3,9 @@ package uk.co.cemerson.flyst.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Observable;
 
-public class FlyingList
+public class FlyingList extends Observable
 {
     private static FlyingList instance = null;
 
@@ -12,8 +13,6 @@ public class FlyingList
 
     private List<Pilot> mPilots = new ArrayList<>();
     private List<Glider> mGliders = new ArrayList<>();
-
-    private List<FlyingListUpdateReceiver> mUpdateReceivers = new ArrayList<>();
 
     private FlyingList(Date flyingListDate)
     {
@@ -42,7 +41,6 @@ public class FlyingList
 
     public void addPilot(Pilot member)
     {
-        updateReceivers();
     }
 
     public List<Pilot> getPilots()
@@ -52,7 +50,6 @@ public class FlyingList
 
     public void addGlider(Glider glider)
     {
-        updateReceivers();
     }
 
     public List<Glider> getGliders()
@@ -76,27 +73,5 @@ public class FlyingList
         }
 
         return numberOfPilotsFlown;
-    }
-
-    public void attachUpdateReceiver(FlyingListUpdateReceiver updateReceiver)
-    {
-        mUpdateReceivers.add(updateReceiver);
-    }
-
-    public void detachUpdateReceiver(FlyingListUpdateReceiver updateReceiver)
-    {
-        mUpdateReceivers.remove(updateReceiver);
-    }
-
-    public void updateReceivers()
-    {
-        for (FlyingListUpdateReceiver receiver : mUpdateReceivers) {
-            receiver.onFlyingListUpdate();
-        }
-    }
-
-    public interface FlyingListUpdateReceiver
-    {
-        public void onFlyingListUpdate();
     }
 }

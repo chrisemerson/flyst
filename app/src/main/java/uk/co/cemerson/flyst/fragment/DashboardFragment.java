@@ -13,6 +13,7 @@ import uk.co.cemerson.flyst.activity.GlidersActivity;
 import uk.co.cemerson.flyst.activity.PilotsActivity;
 import uk.co.cemerson.flyst.activity.RetrievesActivity;
 import uk.co.cemerson.flyst.activity.WinchActivity;
+import uk.co.cemerson.flyst.entity.FlyingList;
 
 public class DashboardFragment extends FlystFragment
 {
@@ -34,12 +35,6 @@ public class DashboardFragment extends FlystFragment
         addButtonListeners();
 
         return v;
-    }
-
-    @Override
-    public void onFlyingListUpdate()
-    {
-        //Load stats and information from flying list here
     }
 
     private void addButtonListeners()
@@ -105,5 +100,11 @@ public class DashboardFragment extends FlystFragment
     {
         Intent i = new Intent(getActivity().getApplicationContext(), activityToStart);
         startActivity(i);
+    }
+
+    @Override
+    public void onFlyingListUpdate(FlyingList flyingList)
+    {
+
     }
 }

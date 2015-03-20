@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import uk.co.cemerson.flyst.R;
+import uk.co.cemerson.flyst.entity.FlyingList;
 
 public class WinchFragment extends FlystFragment
 {
@@ -17,8 +18,8 @@ public class WinchFragment extends FlystFragment
     }
 
     @Override
-    public void onFlyingListUpdate()
+    public void onFlyingListUpdate(FlyingList flyingList)
     {
-        //Load stats and information from flying list here
+
     }
 }
