@@ -29,7 +29,7 @@ public class Member implements SimpleFuzzySearchable
     }
 
     @Override
-    public String getSearchableTerm()
+    public String getFuzzySearchableTerm()
     {
         return getFirstName() + " " + getSurname();
     }

@@ -2,5 +2,5 @@ package uk.co.cemerson.flyst.fuzzysearch;
 
 public interface SimpleFuzzySearchable
 {
-    public String getSearchableTerm();
+    public String getFuzzySearchableTerm();
 }

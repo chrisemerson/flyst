@@ -1,5 +1,7 @@
 package uk.co.cemerson.flyst.repository;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +11,12 @@ import uk.co.cemerson.flyst.entity.Member;
 
 public class MemberRepository
 {
-    private static List<Member> allMembers;
+    private List<Member> allMembers;
 
     public MemberRepository()
     {
+        allMembers = new ArrayList<>();
+
         allMembers.add(new Member("Ian", "Mountain"));
         allMembers.add(new Member("Ian", "Campbell"));
         allMembers.add(new Member("Mick", "Wood"));
@@ -39,9 +43,15 @@ public class MemberRepository
         List<SimpleFuzzySearchResult> searchResults = searcher.search(searchTerm);
         List<Member> returnList = new ArrayList<>();
 
+        Log.i("uk.co.cemerson.flyst", "**********");
+        Log.i("uk.co.cemerson.flyst", "Found search results for '" + searchTerm + "':");
+
         for (SimpleFuzzySearchResult searchResult : searchResults) {
-            returnList.add((Member) searchResult.getSearchableItem());
+            Log.i("uk.co.cemerson.flyst", searchResult.getFuzzySearchableItem().getFuzzySearchableTerm() + " with a distance of " + searchResult.getScore());
+
+            returnList.add((Member) searchResult.getFuzzySearchableItem());
         }
+        Log.i("uk.co.cemerson.flyst", "**********");
 
         return returnList;
     }

@@ -67,7 +67,6 @@ public class DashboardFragment extends FlystFragment
                 startActivityFromClassName(activityToStart);
             }
         });
-
     }
 
     private void startActivityFromClassName(Class activityToStart)
