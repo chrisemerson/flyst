@@ -7,14 +7,17 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
 
 import uk.co.cemerson.flyst.R;
-import uk.co.cemerson.flyst.entity.FlyingList;
 import uk.co.cemerson.flyst.entity.Member;
+import uk.co.cemerson.flyst.entity.Pilot;
 
 public class PilotsFragment extends FlystFragment
 {
@@ -30,38 +33,111 @@ public class PilotsFragment extends FlystFragment
         mAutoCompleteBox = (ListView) view.findViewById(R.id.pilots_autocomplete_view);
         mPilotsOnFlyingList = (ListView) view.findViewById(R.id.pilots_list_view);
 
-        mSearchBox = (EditText) view.findViewById(R.id.member_search_box);
-        mSearchBox.addTextChangedListener(textWatcher);
+        initSearchBoxAutocompleteListener(view);
+        initFlyingListPilotsListAdapter();
 
         return view;
     }
 
     @Override
-    public void onFlyingListUpdate(FlyingList flyingList)
-    {}
-
-    public TextWatcher textWatcher = new TextWatcher()
+    public void onResume()
     {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after)
-        {}
+        super.onResume();
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count)
-        {}
+        updatePilotsOnFlyingListView();
+    }
 
-        @Override
-        public void afterTextChanged(Editable s)
+    private void initSearchBoxAutocompleteListener(View view)
+    {
+        mSearchBox = (EditText) view.findViewById(R.id.member_search_box);
+
+        TextWatcher textWatcher = new TextWatcher()
         {
-            String text = mSearchBox.getText().toString();
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {}
 
-            if (text.equals("")) {
-                mAutoCompleteBox.setVisibility(View.GONE);
-            } else {
-                mAutoCompleteBox.setVisibility(View.VISIBLE);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {}
 
-                List<Member> searchResults = mMemberRepository.searchForMemberByName(text);
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                String text = mSearchBox.getText().toString();
+
+                if (text.equals("")) {
+                    setAutoCompleteBoxItems(null);
+                } else {
+                    setAutoCompleteBoxItems(getMemberRepository().searchForMemberByName(text));
+                }
             }
+        };
+
+        mSearchBox.addTextChangedListener(textWatcher);
+    }
+
+    private void initFlyingListPilotsListAdapter()
+    {
+        ArrayAdapter<Pilot> adapter = new ArrayAdapter<>(
+            getActivity(),
+            android.R.layout.simple_list_item_1,
+            getFlyingList().getPilots()
+        );
+
+        mPilotsOnFlyingList.setAdapter(adapter);
+
+        mPilotsOnFlyingList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                getFlyingList().deletePilot((Pilot) mPilotsOnFlyingList.getAdapter().getItem(position));
+                updatePilotsOnFlyingListView();
+            }
+        });
+    }
+
+    private void setAutoCompleteBoxItems(List<Member> members)
+    {
+        if (members == null) {
+            mAutoCompleteBox.setVisibility(View.GONE);
+        } else {
+            mAutoCompleteBox.setVisibility(View.VISIBLE);
+
+            ArrayAdapter<Member> adapter = new ArrayAdapter<>(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                members
+            );
+
+            mAutoCompleteBox.setAdapter(adapter);
+
+            mAutoCompleteBox.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    getFlyingList().addPilot(new Pilot((Member) mAutoCompleteBox.getAdapter().getItem(position)));
+
+                    resetPilotSearchBox();
+                }
+            });
         }
-    };
+    }
+
+    private void resetPilotSearchBox()
+    {
+        mSearchBox.setText("");
+        mAutoCompleteBox.setVisibility(View.GONE);
+    }
+
+    private void updatePilotsOnFlyingListView()
+    {
+        BaseAdapter adapter = (BaseAdapter) mPilotsOnFlyingList.getAdapter();
+
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

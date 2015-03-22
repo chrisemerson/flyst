@@ -1,12 +1,23 @@
 package uk.co.cemerson.flyst.entity;
 
-import java.util.Observable;
+import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
 
-public class Pilot extends Observable
+public class Pilot implements SimpleFuzzySearchable
 {
     private Member mMember;
     private boolean mHasFlown;
     private String mNotes;
+
+    public Pilot(Member member)
+    {
+        setMember(member);
+    }
+
+    @Override
+    public String getFuzzySearchableTerm()
+    {
+        return mMember.getFuzzySearchableTerm();
+    }
 
     public Member getMember()
     {
@@ -36,5 +47,11 @@ public class Pilot extends Observable
     public void setNotes(String notes)
     {
         mNotes = notes;
+    }
+
+    @Override
+    public String toString()
+    {
+        return mMember.toString();
     }
 }

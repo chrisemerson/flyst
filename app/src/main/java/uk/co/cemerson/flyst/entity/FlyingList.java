@@ -3,10 +3,8 @@ package uk.co.cemerson.flyst.entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
-public class FlyingList extends Observable implements Observer
+public class FlyingList
 {
     private static FlyingList instance = null;
 
@@ -35,12 +33,6 @@ public class FlyingList extends Observable implements Observer
         return new FlyingList(flyingListDate);
     }
 
-    @Override
-    public void update(Observable observable, Object data)
-    {
-        notifyObservers();
-    }
-
     public void save()
     {
         //Save flying list to file system
@@ -48,17 +40,12 @@ public class FlyingList extends Observable implements Observer
 
     public void addPilot(Pilot pilot)
     {
-        pilot.addObserver(this);
         mPilots.add(pilot);
-
-        notifyObservers();
     }
 
     public void deletePilot(Pilot pilot)
     {
         mPilots.remove(pilot);
-
-        notifyObservers();
     }
 
     public List<Pilot> getPilots()
@@ -68,17 +55,12 @@ public class FlyingList extends Observable implements Observer
 
     public void addGlider(Glider glider)
     {
-        glider.addObserver(this);
         mGliders.add(glider);
-
-        notifyObservers();
     }
 
     public void deleteGlider(Glider glider)
     {
         mGliders.remove(glider);
-
-        notifyObservers();
     }
 
     public List<Glider> getGliders()

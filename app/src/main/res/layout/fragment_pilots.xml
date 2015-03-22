@@ -17,26 +17,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <EditText
+            android:id="@+id/member_search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/member_search_box"
             android:layout_gravity="center_horizontal"
             android:hint="@string/pilot_search_box_hint"
             android:drawableLeft="@android:drawable/ic_menu_search"/>
 
         <ListView
+            android:id="@+id/pilots_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/member_search_box"
-            android:id="@+id/pilots_autocomplete_view"
-            android:layout_gravity="center_horizontal"
-            android:visibility="gone"/>
+            android:layout_gravity="center_horizontal"/>
 
         <ListView
+            android:id="@+id/pilots_autocomplete_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/member_search_box"
-            android:id="@+id/pilots_list_view"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            android:background="@color/dialog_background"/>
     </RelativeLayout>
 </LinearLayout>

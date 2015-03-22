@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import uk.co.cemerson.flyst.R;
-import uk.co.cemerson.flyst.entity.FlyingList;
 
 public class GlidersFragment extends FlystFragment
 {
@@ -15,11 +14,5 @@ public class GlidersFragment extends FlystFragment
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         return inflater.inflate(R.layout.fragment_gliders, container, false);
-    }
-
-    @Override
-    public void onFlyingListUpdate(FlyingList flyingList)
-    {
-
     }
 }

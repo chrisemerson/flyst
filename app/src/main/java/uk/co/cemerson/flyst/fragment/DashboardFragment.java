@@ -38,6 +38,14 @@ public class DashboardFragment extends FlystFragment
         return view;
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        updatePilotsFlownDisplay();
+    }
+
     private void getReferencesFromView(View view)
     {
         mPilotsButton = (Button) view.findViewById(R.id.dashboard_button_pilots);
@@ -75,14 +83,10 @@ public class DashboardFragment extends FlystFragment
         startActivity(i);
     }
 
-    @Override
-    public void onFlyingListUpdate(FlyingList flyingList)
+    private void updatePilotsFlownDisplay()
     {
-        updatePilotsFlownDisplay(flyingList);
-    }
+        FlyingList flyingList = getFlyingList();
 
-    private void updatePilotsFlownDisplay(FlyingList flyingList)
-    {
         int numberOfPilotsOnList = flyingList.getNumberOfPilotsOnList();
         int numberOfPilotsFlown = flyingList.getNumberOfPilotsOnListWhoHaveFlown();
 

@@ -73,4 +73,10 @@ public class Member implements SimpleFuzzySearchable
     {
         mIsRetrieveDriver = isRetrieveDriver;
     }
+
+    @Override
+    public String toString()
+    {
+        return mFirstName + " " + mSurname;
+    }
 }
