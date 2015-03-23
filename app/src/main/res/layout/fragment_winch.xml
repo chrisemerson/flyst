@@ -9,6 +9,6 @@
         android:textSize="@dimen/main_title_text_size"
         android:textColor="@color/main_title"
         android:text="@string/activity_name_winch"
-        android:id="@+id/textView"
+        android:id="@+id/pilot_fragment_title"
         android:padding="16dp"/>
 </LinearLayout>

@@ -1,6 +1,8 @@
 package uk.co.cemerson.flyst.fuzzysearch;
 
+import java.util.List;
+
 public interface SimpleFuzzySearchable
 {
-    public String getFuzzySearchableTerm();
+    public List<String> getFuzzySearchableTerms();
 }

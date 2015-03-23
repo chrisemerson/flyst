@@ -1,5 +1,7 @@
 package uk.co.cemerson.flyst.entity;
 
+import java.util.List;
+
 import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
 
 public class Pilot implements SimpleFuzzySearchable
@@ -14,9 +16,9 @@ public class Pilot implements SimpleFuzzySearchable
     }
 
     @Override
-    public String getFuzzySearchableTerm()
+    public List<String> getFuzzySearchableTerms()
     {
-        return mMember.getFuzzySearchableTerm();
+        return mMember.getFuzzySearchableTerms();
     }
 
     public Member getMember()

@@ -34,15 +34,21 @@ public class MemberRepository
         allMembers.add(new Member("Mark", "Evans"));
     }
 
-    public List<Member> searchForMemberByName(String searchTerm)
+    public List<Member> searchForMemberByName(String searchTerm, int limit)
     {
         SimpleFuzzySearcher searcher = new SimpleFuzzySearcher(allMembers);
 
         List<SimpleFuzzySearchResult> searchResults = searcher.search(searchTerm);
         List<Member> returnList = new ArrayList<>();
 
+        int counter = 0;
+
         for (SimpleFuzzySearchResult searchResult : searchResults) {
             returnList.add((Member) searchResult.getFuzzySearchableItem());
+
+            if (++counter >= limit) {
+                break;
+            }
         }
 
         return returnList;

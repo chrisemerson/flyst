@@ -10,5 +10,5 @@
         android:textSize="@dimen/main_title_text_size"
         android:textColor="@color/main_title"
         android:text="Upcoming Tasks"
-        android:id="@+id/textView"/>
+        android:id="@+id/pilot_fragment_title"/>
 </LinearLayout>

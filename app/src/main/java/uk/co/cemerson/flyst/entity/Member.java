@@ -1,5 +1,7 @@
 package uk.co.cemerson.flyst.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
@@ -29,9 +31,15 @@ public class Member implements SimpleFuzzySearchable
     }
 
     @Override
-    public String getFuzzySearchableTerm()
+    public List<String> getFuzzySearchableTerms()
     {
-        return getFirstName() + " " + getSurname();
+        List<String> searchTerms = new ArrayList<>();
+
+        searchTerms.add(getFirstName());
+        searchTerms.add(getSurname());
+        searchTerms.add(getFirstName() + " " + getSurname());
+
+        return searchTerms;
     }
 
     public String getFirstName()

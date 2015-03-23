@@ -4,24 +4,24 @@ import android.support.annotation.NonNull;
 
 public class SimpleFuzzySearchResult implements Comparable<SimpleFuzzySearchResult>
 {
-    private int mScore;
+    private int mDistance;
     private SimpleFuzzySearchable mSearchTerm;
 
-    public SimpleFuzzySearchResult(int score, SimpleFuzzySearchable searchTerm)
+    public SimpleFuzzySearchResult(int distance, SimpleFuzzySearchable searchTerm)
     {
-        mScore = score;
+        mDistance = distance;
         mSearchTerm = searchTerm;
     }
 
     @Override
     public int compareTo(@NonNull SimpleFuzzySearchResult other)
     {
-        return getScore() - other.getScore();
+        return getDistance() - other.getDistance();
     }
 
-    public int getScore()
+    public int getDistance()
     {
-        return mScore;
+        return mDistance;
     }
 
     public SimpleFuzzySearchable getFuzzySearchableItem()

@@ -13,6 +13,8 @@ abstract public class TimeTickReceivingFragment extends Fragment
     {
         super.onResume();
 
+        onTimeTick();
+
         IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK);
         getActivity().registerReceiver(mTimeTickReceiver, filter);
     }

@@ -1,42 +1,61 @@
 package uk.co.cemerson.flyst.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.List;
-
 import uk.co.cemerson.flyst.R;
-import uk.co.cemerson.flyst.entity.Member;
+import uk.co.cemerson.flyst.dialog.AddPilotDialog;
 import uk.co.cemerson.flyst.entity.Pilot;
 
 public class PilotsFragment extends FlystFragment
 {
-    private EditText mSearchBox;
-    private ListView mAutoCompleteBox;
     private ListView mPilotsOnFlyingList;
+
+    private static final String DIALOG_ADD_PILOT = "dialog_add_pilot";
+    private static final int REQUEST_ADD_PILOT = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_pilots, container, false);
 
-        mAutoCompleteBox = (ListView) view.findViewById(R.id.pilots_autocomplete_view);
         mPilotsOnFlyingList = (ListView) view.findViewById(R.id.pilots_list_view);
 
-        initSearchBoxAutocompleteListener(view);
+        Button button = (Button) view.findViewById(R.id.button_add_pilot);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                AddPilotDialog dialog = new AddPilotDialog();
+                dialog.setTargetFragment(PilotsFragment.this, REQUEST_ADD_PILOT);
+                dialog.show(fm, DIALOG_ADD_PILOT);
+            }
+        });
+
         initFlyingListPilotsListAdapter();
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_ADD_PILOT) {
+            updatePilotsOnFlyingListView();
+        }
     }
 
     @Override
@@ -45,36 +64,6 @@ public class PilotsFragment extends FlystFragment
         super.onResume();
 
         updatePilotsOnFlyingListView();
-    }
-
-    private void initSearchBoxAutocompleteListener(View view)
-    {
-        mSearchBox = (EditText) view.findViewById(R.id.member_search_box);
-
-        TextWatcher textWatcher = new TextWatcher()
-        {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {}
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-                String text = mSearchBox.getText().toString();
-
-                if (text.equals("")) {
-                    setAutoCompleteBoxItems(null);
-                } else {
-                    setAutoCompleteBoxItems(getMemberRepository().searchForMemberByName(text));
-                }
-            }
-        };
-
-        mSearchBox.addTextChangedListener(textWatcher);
     }
 
     private void initFlyingListPilotsListAdapter()
@@ -96,40 +85,6 @@ public class PilotsFragment extends FlystFragment
                 updatePilotsOnFlyingListView();
             }
         });
-    }
-
-    private void setAutoCompleteBoxItems(List<Member> members)
-    {
-        if (members == null) {
-            mAutoCompleteBox.setVisibility(View.GONE);
-        } else {
-            mAutoCompleteBox.setVisibility(View.VISIBLE);
-
-            ArrayAdapter<Member> adapter = new ArrayAdapter<>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                members
-            );
-
-            mAutoCompleteBox.setAdapter(adapter);
-
-            mAutoCompleteBox.setOnItemClickListener(new AdapterView.OnItemClickListener()
-            {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    getFlyingList().addPilot(new Pilot((Member) mAutoCompleteBox.getAdapter().getItem(position)));
-
-                    resetPilotSearchBox();
-                }
-            });
-        }
-    }
-
-    private void resetPilotSearchBox()
-    {
-        mSearchBox.setText("");
-        mAutoCompleteBox.setVisibility(View.GONE);
     }
 
     private void updatePilotsOnFlyingListView()
