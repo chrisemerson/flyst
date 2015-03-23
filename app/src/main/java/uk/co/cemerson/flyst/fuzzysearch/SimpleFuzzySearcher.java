@@ -44,7 +44,10 @@ public class SimpleFuzzySearcher
                     truncatedItemSearchableTerm = itemSearchableTerm;
                 }
 
-                int distance = distanceCalculator.calculateDistanceBetweenStrings(searchTerm, truncatedItemSearchableTerm);
+                int distance = distanceCalculator.calculateDistanceBetweenStrings(
+                    searchTerm.toLowerCase(),
+                    truncatedItemSearchableTerm.toLowerCase()
+                );
 
                 if (mThreshold == null || distance <= mThreshold) {
                     searchMatched = true;
@@ -53,7 +56,7 @@ public class SimpleFuzzySearcher
             }
 
             if (searchMatched) {
-                returnList.add(new SimpleFuzzySearchResult(minDistance, searchableItem));
+                returnList.add(new SimpleFuzzySearchResult(searchableItem, minDistance));
             }
         }
 

@@ -25,5 +25,8 @@
     <string name="label_dashboard_pilots_flown">Pilots on Flying List flown:</string>
     <string name="label_dashboard_no_pilots_on_list">No pilots currently on list</string>
     <string name="add_member_button_text">Add Member</string>
+    <string name="label_time_added_to_list">Time added to list:</string>
+    <string name="label_remove_pilot_from_list">Remove Pilot From List</string>
+    <string name="label_already_on_flying_list">Already on Flying List</string>
 
 </resources>

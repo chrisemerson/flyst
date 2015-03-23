@@ -1,6 +1,7 @@
 package uk.co.cemerson.flyst.entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +41,11 @@ public class Member implements SimpleFuzzySearchable
         searchTerms.add(getFirstName() + " " + getSurname());
 
         return searchTerms;
+    }
+
+    public int getFuzzySearchableRank()
+    {
+        return FlyingList.getInstance(new Date()).isMemberOnList(this) ? 0 : 1;
     }
 
     public String getFirstName()

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_padding">
+    <TextView
+        android:id="@+id/member_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/basic_text_size"
+        android:textColor="@color/basic_text"
+        android:layout_gravity="left|bottom"/>
+
+    <TextView
+        android:id="@+id/already_on_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/small_text_size"
+        android:textColor="@color/greyed_out_text"
+        android:text="@string/label_already_on_flying_list"
+        android:visibility="invisible"
+        android:layout_gravity="right|bottom"/>
+</FrameLayout>

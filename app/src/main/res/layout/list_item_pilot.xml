@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/pilot_name"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/basic_text_size"
-        android:textColor="@color/main_title"/>
+        android:padding="@dimen/default_padding"
+        android:layout_gravity="left">
+        <TextView
+            android:id="@+id/pilot_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/basic_text_size"
+            android:textColor="@color/basic_text"/>
 
-    <TextView
-        android:id="@+id/time_on_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/time_on_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/small_text_size"
+            android:textColor="@color/greyed_out_text"/>
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/button_remove_pilot_from_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:contentDescription="@string/label_remove_pilot_from_list"
+        android:src="@android:drawable/ic_delete"/>
+</FrameLayout>

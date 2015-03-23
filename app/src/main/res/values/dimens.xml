@@ -1,11 +1,15 @@
 <resources>
 
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="default_padding_small">8dp</dimen>
+
     <dimen name="upcoming_tasks_panel_width">600dp</dimen>
 
     <dimen name="clickable_bar_width">70dp</dimen>
     <dimen name="clickable_bar_text_size">30sp</dimen>
 
     <dimen name="basic_text_size">20sp</dimen>
+    <dimen name="small_text_size">15sp</dimen>
 
     <dimen name="status_clock_text_size">40sp</dimen>
     <dimen name="status_clock_margin_top">-8dp</dimen>

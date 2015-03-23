@@ -1,6 +1,8 @@
 package uk.co.cemerson.flyst.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,14 +10,17 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import uk.co.cemerson.flyst.R;
 import uk.co.cemerson.flyst.dialog.AddPilotDialog;
@@ -72,16 +77,6 @@ public class PilotsFragment extends FlystFragment
     private void initFlyingListPilotsListAdapter()
     {
         mPilotsOnFlyingList.setAdapter(new PilotListAdapter((ArrayList<Pilot>) getFlyingList().getPilots()));
-
-        mPilotsOnFlyingList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                getFlyingList().deletePilot((Pilot) mPilotsOnFlyingList.getAdapter().getItem(position));
-                updatePilotsOnFlyingListView();
-            }
-        });
     }
 
     private class PilotListAdapter extends ArrayAdapter<Pilot> {
@@ -96,16 +91,63 @@ public class PilotsFragment extends FlystFragment
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_pilot, null);
             }
 
-            Pilot pilot = getItem(position);
+            initView(convertView, getItem(position));
 
+            return convertView;
+        }
+
+        private void initView(View convertView, final Pilot pilot)
+        {
             TextView pilotNameTextView = (TextView) convertView.findViewById(R.id.pilot_name);
             pilotNameTextView.setText(pilot.getDisplayName());
 
             TextView pilotTimeOnListTextView = (TextView) convertView.findViewById(R.id.time_on_list);
-            pilotTimeOnListTextView.setText(pilot.getDateAdded().toString());
+            pilotTimeOnListTextView.setText(
+                getResources().getString(R.string.label_time_added_to_list)
+                    + " "
+                    + getDateAddedFormattedAsTime(pilot)
+            );
 
-            return convertView;
+            ImageButton deletePilotFromListButton = (ImageButton) convertView.findViewById(R.id.button_remove_pilot_from_list);
+            deletePilotFromListButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    confirmRemovePilotFromList(pilot);
+                }
+            });
         }
+
+        private void confirmRemovePilotFromList(final Pilot pilot)
+        {
+            new AlertDialog.Builder(getActivity())
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Remove Pilot")
+                .setMessage("Are you sure you want to remove " + pilot.getDisplayName() + " from the Flying List?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        PilotsFragment.this.removePilotFromList(pilot);
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+        }
+
+        private String getDateAddedFormattedAsTime(Pilot pilot)
+        {
+            DateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+            return timeFormatter.format(pilot.getDateAdded());
+        }
+    }
+
+    private void removePilotFromList(Pilot pilotToRemove)
+    {
+        getFlyingList().deletePilot(pilotToRemove);
+        updatePilotsOnFlyingListView();
     }
 
     private void updatePilotsOnFlyingListView()

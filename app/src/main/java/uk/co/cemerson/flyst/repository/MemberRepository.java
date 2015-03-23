@@ -10,8 +10,9 @@ import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearcher;
 public class MemberRepository
 {
     private List<Member> allMembers;
+    private static MemberRepository instance = null;
 
-    public MemberRepository()
+    private MemberRepository()
     {
         allMembers = new ArrayList<>();
 
@@ -32,6 +33,15 @@ public class MemberRepository
         allMembers.add(new Member("Rebecca", "Ward"));
         allMembers.add(new Member("Toby", "Evans"));
         allMembers.add(new Member("Mark", "Evans"));
+    }
+
+    public static MemberRepository getInstance()
+    {
+        if (instance == null) {
+            instance = new MemberRepository();
+        }
+
+        return instance;
     }
 
     public List<Member> searchForMemberByName(String searchTerm, int limit)

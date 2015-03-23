@@ -25,6 +25,12 @@ public class Pilot implements SimpleFuzzySearchable
     }
 
     @Override
+    public int getFuzzySearchableRank()
+    {
+        return 0;
+    }
+
+    @Override
     public String toString()
     {
         return mMember.toString();

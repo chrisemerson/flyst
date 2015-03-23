@@ -85,4 +85,15 @@ public class FlyingList
 
         return numberOfPilotsFlown;
     }
+
+    public boolean isMemberOnList(Member member)
+    {
+        for (Pilot pilot : mPilots) {
+            if (pilot.getMember() == member) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
