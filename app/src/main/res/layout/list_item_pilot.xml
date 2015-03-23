@@ -6,7 +6,9 @@
     <TextView
         android:id="@+id/pilot_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/basic_text_size"
+        android:textColor="@color/main_title"/>
 
     <TextView
         android:id="@+id/time_on_list"
