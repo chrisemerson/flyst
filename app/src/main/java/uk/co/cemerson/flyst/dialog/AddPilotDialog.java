@@ -104,7 +104,7 @@ public class AddPilotDialog extends DialogFragment
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-                    getFlyingList().addPilot(new Pilot((Member) mAutoCompleteBox.getAdapter().getItem(position)));
+                    getFlyingList().addPilot(new Pilot((Member) mAutoCompleteBox.getAdapter().getItem(position), new Date()));
 
                     getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, new Intent());
                     getDialog().dismiss();

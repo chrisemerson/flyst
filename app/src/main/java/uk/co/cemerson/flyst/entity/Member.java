@@ -62,6 +62,11 @@ public class Member implements SimpleFuzzySearchable
         mSurname = surname;
     }
 
+    public String getDisplayName()
+    {
+        return getFirstName() + " " + getSurname();
+    }
+
     public boolean isWinchDriver()
     {
         return mIsWinchDriver;

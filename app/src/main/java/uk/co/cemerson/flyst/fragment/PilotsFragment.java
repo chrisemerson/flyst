@@ -13,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import uk.co.cemerson.flyst.R;
 import uk.co.cemerson.flyst.dialog.AddPilotDialog;
@@ -68,13 +71,7 @@ public class PilotsFragment extends FlystFragment
 
     private void initFlyingListPilotsListAdapter()
     {
-        ArrayAdapter<Pilot> adapter = new ArrayAdapter<>(
-            getActivity(),
-            android.R.layout.simple_list_item_1,
-            getFlyingList().getPilots()
-        );
-
-        mPilotsOnFlyingList.setAdapter(adapter);
+        mPilotsOnFlyingList.setAdapter(new PilotListAdapter((ArrayList<Pilot>) getFlyingList().getPilots()));
 
         mPilotsOnFlyingList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -85,6 +82,30 @@ public class PilotsFragment extends FlystFragment
                 updatePilotsOnFlyingListView();
             }
         });
+    }
+
+    private class PilotListAdapter extends ArrayAdapter<Pilot> {
+        public PilotListAdapter(ArrayList<Pilot> pilots) {
+            super(getActivity(), 0, pilots);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            if (convertView == null) {
+                convertView = getActivity().getLayoutInflater().inflate(R.layout.list_item_pilot, null);
+            }
+
+            Pilot pilot = getItem(position);
+
+            TextView pilotNameTextView = (TextView) convertView.findViewById(R.id.pilot_name);
+            pilotNameTextView.setText(pilot.getDisplayName());
+
+            TextView pilotTimeOnListTextView = (TextView) convertView.findViewById(R.id.time_on_list);
+            pilotTimeOnListTextView.setText(pilot.getDateAdded().toString());
+
+            return convertView;
+        }
     }
 
     private void updatePilotsOnFlyingListView()

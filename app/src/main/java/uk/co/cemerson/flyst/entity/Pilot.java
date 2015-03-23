@@ -1,5 +1,6 @@
 package uk.co.cemerson.flyst.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
@@ -9,16 +10,29 @@ public class Pilot implements SimpleFuzzySearchable
     private Member mMember;
     private boolean mHasFlown;
     private String mNotes;
+    private Date mDateAdded;
 
-    public Pilot(Member member)
+    public Pilot(Member member, Date dateAdded)
     {
         setMember(member);
+        setDateAdded(dateAdded);
     }
 
     @Override
     public List<String> getFuzzySearchableTerms()
     {
         return mMember.getFuzzySearchableTerms();
+    }
+
+    @Override
+    public String toString()
+    {
+        return mMember.toString();
+    }
+
+    public String getDisplayName()
+    {
+        return mMember.getDisplayName();
     }
 
     public Member getMember()
@@ -51,9 +65,13 @@ public class Pilot implements SimpleFuzzySearchable
         mNotes = notes;
     }
 
-    @Override
-    public String toString()
+    public Date getDateAdded()
     {
-        return mMember.toString();
+        return mDateAdded;
+    }
+
+    public void setDateAdded(Date dateAdded)
+    {
+        mDateAdded = dateAdded;
     }
 }
