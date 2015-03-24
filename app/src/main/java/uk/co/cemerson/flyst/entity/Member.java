@@ -1,34 +1,62 @@
 package uk.co.cemerson.flyst.entity;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
+import uk.co.cemerson.flyst.repository.JSONSerializable;
 
-public class Member implements SimpleFuzzySearchable
+public class Member implements SimpleFuzzySearchable, JSONSerializable
 {
-    private UUID id;
+    private static final String JSON_KEY_FIRST_NAME = "firstname";
+    private static final String JSON_KEY_SURNAME = "surname";
+    private static final String JSON_KEY_IS_WINCH_DRIVER = "iswinchdriver";
+    private static final String JSON_KEY_IS_RETRIEVE_DRIVER = "isretrievedriver";
+    private static final String JSON_KEY_INSTRUCTOR_CATEGORY = "instructorcategory";
+
+    private static final String LOG_TAG = "uk.co.cemerson.flyst";
+
     private String mFirstName;
     private String mSurname;
     private boolean mIsWinchDriver;
     private boolean mIsRetrieveDriver;
+    private InstructorCategory mInstructorCategory;
 
-    public Member (String firstName, String surname)
+    public Member()
+    {
+        setFirstName("");
+        setSurname("");
+        setIsWinchDriver(false);
+        setIsRetrieveDriver(false);
+        setInstructorCategory(InstructorCategory.NOT_AN_INSTRUCTOR);
+    }
+
+    public Member(String firstName, String surname)
     {
         setFirstName(firstName);
         setSurname(surname);
+        setIsWinchDriver(false);
+        setIsRetrieveDriver(false);
+        setInstructorCategory(InstructorCategory.NOT_AN_INSTRUCTOR);
     }
 
-    public UUID getId()
+    public Member (JSONObject jsonObject)
     {
-        return id;
-    }
-
-    public void setId(UUID id)
-    {
-        this.id = id;
+        try {
+            setFirstName(jsonObject.getString(JSON_KEY_FIRST_NAME));
+            setSurname(jsonObject.getString(JSON_KEY_SURNAME));
+            setIsWinchDriver(jsonObject.getBoolean(JSON_KEY_IS_WINCH_DRIVER));
+            setIsRetrieveDriver(jsonObject.getBoolean(JSON_KEY_IS_RETRIEVE_DRIVER));
+            setInstructorCategory(InstructorCategory.fromRank(jsonObject.getInt(JSON_KEY_INSTRUCTOR_CATEGORY)));
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error decoding member information: ", e);
+        }
     }
 
     @Override
@@ -46,6 +74,25 @@ public class Member implements SimpleFuzzySearchable
     public int getFuzzySearchableRank()
     {
         return FlyingList.getInstance(new Date()).isMemberOnList(this) ? 0 : 1;
+    }
+
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put(JSON_KEY_FIRST_NAME, getFirstName());
+        jsonObject.put(JSON_KEY_SURNAME, getSurname());
+        jsonObject.put(JSON_KEY_IS_WINCH_DRIVER, isWinchDriver());
+        jsonObject.put(JSON_KEY_IS_RETRIEVE_DRIVER, isRetrieveDriver());
+        jsonObject.put(JSON_KEY_INSTRUCTOR_CATEGORY, getInstructorCategory().getInstructorRank());
+
+        return jsonObject;
+    }
+
+    @Override
+    public String toString()
+    {
+        return mFirstName + " " + mSurname;
     }
 
     public String getFirstName()
@@ -78,7 +125,7 @@ public class Member implements SimpleFuzzySearchable
         return mIsWinchDriver;
     }
 
-    public void setWinchDriver(boolean isWinchDriver)
+    public void setIsWinchDriver(boolean isWinchDriver)
     {
         mIsWinchDriver = isWinchDriver;
     }
@@ -88,14 +135,18 @@ public class Member implements SimpleFuzzySearchable
         return mIsRetrieveDriver;
     }
 
-    public void setRetrieveDriver(boolean isRetrieveDriver)
+    public void setIsRetrieveDriver(boolean isRetrieveDriver)
     {
         mIsRetrieveDriver = isRetrieveDriver;
     }
 
-    @Override
-    public String toString()
+    public InstructorCategory getInstructorCategory()
     {
-        return mFirstName + " " + mSurname;
+        return mInstructorCategory;
+    }
+
+    public void setInstructorCategory(InstructorCategory instructorCategory)
+    {
+        mInstructorCategory = instructorCategory;
     }
 }

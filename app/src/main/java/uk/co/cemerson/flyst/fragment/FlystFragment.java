@@ -19,7 +19,7 @@ abstract public class FlystFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         mFlyingList = FlyingList.getInstance(new Date());
-        mMemberRepository = MemberRepository.getInstance();
+        mMemberRepository = MemberRepository.getInstance(getActivity().getApplicationContext());
     }
 
     @Override
