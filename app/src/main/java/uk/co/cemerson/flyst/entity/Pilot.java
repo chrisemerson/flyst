@@ -1,11 +1,15 @@
 package uk.co.cemerson.flyst.entity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 import java.util.List;
 
 import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
+import uk.co.cemerson.flyst.repository.JSONSerializable;
 
-public class Pilot implements SimpleFuzzySearchable
+public class Pilot implements SimpleFuzzySearchable, JSONSerializable
 {
     private Member mMember;
     private boolean mHasFlown;
@@ -34,6 +38,12 @@ public class Pilot implements SimpleFuzzySearchable
     public String toString()
     {
         return mMember.toString();
+    }
+
+    @Override
+    public JSONObject toJSON() throws JSONException
+    {
+        return null;
     }
 
     public String getDisplayName()

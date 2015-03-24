@@ -1,10 +1,21 @@
 package uk.co.cemerson.flyst.entity;
 
-public class Glider
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import uk.co.cemerson.flyst.repository.JSONSerializable;
+
+public class Glider implements JSONSerializable
 {
     private String mRegistration;
     private String mType;
     private boolean mIsTwoSeater;
+
+    @Override
+    public JSONObject toJSON() throws JSONException
+    {
+        return null;
+    }
 
     public String getRegistration()
     {

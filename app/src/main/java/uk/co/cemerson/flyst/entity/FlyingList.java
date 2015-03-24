@@ -1,11 +1,20 @@
 package uk.co.cemerson.flyst.entity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FlyingList
+import uk.co.cemerson.flyst.repository.JSONSerializable;
+
+public class FlyingList implements JSONSerializable
 {
+    private static final String JSON_KEY_PILOTS = "pilots";
+    private static final String JSON_KEY_GLIDERS = "gliders";
+
     private static FlyingList instance = null;
 
     private Date mFlyingListDate;
@@ -36,6 +45,39 @@ public class FlyingList
     public void save()
     {
         //Save flying list to file system
+    }
+
+    @Override
+    public JSONObject toJSON() throws JSONException
+    {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put(JSON_KEY_PILOTS, getPilotsJSONArray());
+        jsonObject.put(JSON_KEY_GLIDERS, getGlidersJSONArray());
+
+        return jsonObject;
+    }
+
+    private JSONArray getPilotsJSONArray() throws JSONException
+    {
+        JSONArray pilots = new JSONArray();
+
+        for (Pilot pilot : mPilots) {
+            pilots.put(pilot.toJSON());
+        }
+
+        return pilots;
+    }
+
+    private JSONArray getGlidersJSONArray() throws JSONException
+    {
+        JSONArray gliders = new JSONArray();
+
+        for (Glider glider : mGliders) {
+            gliders.put(glider.toJSON());
+        }
+
+        return gliders;
     }
 
     public void addPilot(Pilot pilot)
