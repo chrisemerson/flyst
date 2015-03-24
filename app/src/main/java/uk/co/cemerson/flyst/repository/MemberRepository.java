@@ -107,12 +107,6 @@ public class MemberRepository implements JSONSerializable
         return returnList;
     }
 
-    public void clearAllMembers()
-    {
-        allMembers.clear();
-        save();
-    }
-
     public void addMember(Member member)
     {
         allMembers.add(member);
