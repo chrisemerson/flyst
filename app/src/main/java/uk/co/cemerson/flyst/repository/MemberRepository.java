@@ -29,7 +29,6 @@ public class MemberRepository implements JSONSerializable
     {
         jsonFile = new JSONFile(context, FILE_KEY);
         allMembers = loadMembersFromStorage(jsonFile);
-        save();
     }
 
     public static MemberRepository getInstance(Context context)
