@@ -1,4 +1,4 @@
-package uk.co.cemerson.flyst.sunset;
+package uk.co.cemerson.flyst.util;
 
 import com.luckycatlabs.sunrisesunset.SunriseSunsetCalculator;
 import com.luckycatlabs.sunrisesunset.dto.Location;
