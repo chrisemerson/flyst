@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import uk.co.cemerson.flyst.entity.Member;
 import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchResult;
@@ -20,15 +21,19 @@ public class MemberRepository implements JSONSerializable
     private static final String FILE_KEY = "members";
     private static final String JSON_KEY_MEMBERS = "members";
 
-    private JSONFile jsonFile;
-    private List<Member> allMembers;
+    private Context mContext;
+
+    private JSONFile mJSONFile;
+    private List<Member> mMembers;
 
     private static MemberRepository instance = null;
 
     private MemberRepository(Context context)
     {
-        jsonFile = new JSONFile(context, FILE_KEY);
-        allMembers = loadMembersFromStorage(jsonFile);
+        mContext = context;
+        mJSONFile = new JSONFile(context, FILE_KEY);
+        mMembers = loadMembersFromStorage(mJSONFile);
+        save();
     }
 
     public static MemberRepository getInstance(Context context)
@@ -45,7 +50,7 @@ public class MemberRepository implements JSONSerializable
     {
         JSONArray array = new JSONArray();
 
-        for (JSONSerializable member : allMembers) {
+        for (JSONSerializable member : mMembers) {
             array.put(member.toJSON());
         }
 
@@ -57,7 +62,7 @@ public class MemberRepository implements JSONSerializable
 
     public void save()
     {
-        saveMembersToStorage(jsonFile);
+        saveMembersToStorage(mJSONFile);
     }
 
     private List<Member> loadMembersFromStorage(JSONFile jsonFile)
@@ -69,7 +74,7 @@ public class MemberRepository implements JSONSerializable
             JSONArray membersArray = loadedData.getJSONArray(JSON_KEY_MEMBERS);
 
             for (int i = 0; i < membersArray.length(); i++) {
-                loadedMembers.add(new Member(membersArray.getJSONObject(i)));
+                loadedMembers.add(new Member(mContext, membersArray.getJSONObject(i)));
             }
         } catch (Exception e) {
             Log.e("uk.co.cemerson.flyst", "Error loading members: ", e);
@@ -89,7 +94,7 @@ public class MemberRepository implements JSONSerializable
 
     public List<Member> searchForMemberByName(String searchTerm, int limit)
     {
-        SimpleFuzzySearcher searcher = new SimpleFuzzySearcher(allMembers);
+        SimpleFuzzySearcher searcher = new SimpleFuzzySearcher(mMembers);
 
         List<SimpleFuzzySearchResult> searchResults = searcher.search(searchTerm);
         List<Member> returnList = new ArrayList<>();
@@ -107,15 +112,26 @@ public class MemberRepository implements JSONSerializable
         return returnList;
     }
 
+    public Member findByID(UUID id)
+    {
+        for (Member member : mMembers) {
+            if (member.getID().equals(id)) {
+                return member;
+            }
+        }
+
+        return null;
+    }
+
     public void addMember(Member member)
     {
-        allMembers.add(member);
+        mMembers.add(member);
         save();
     }
 
     public void deleteMember(Member member)
     {
-        allMembers.remove(member);
+        mMembers.remove(member);
         save();
     }
 }

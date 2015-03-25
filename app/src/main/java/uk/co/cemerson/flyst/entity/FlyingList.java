@@ -1,5 +1,7 @@
 package uk.co.cemerson.flyst.entity;
 
+import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,29 +19,31 @@ public class FlyingList implements JSONSerializable
 
     private static FlyingList instance = null;
 
+    private Context mContext;
     private Date mFlyingListDate;
 
     private List<Pilot> mPilots = new ArrayList<>();
     private List<Glider> mGliders = new ArrayList<>();
 
-    private FlyingList(Date flyingListDate)
+    private FlyingList(Context context, Date flyingListDate)
     {
+        mContext = context;
         mFlyingListDate = flyingListDate;
     }
 
-    public static FlyingList getInstance(Date flyingListDate)
+    public static FlyingList getInstance(Context context, Date flyingListDate)
     {
         if (instance == null) {
-            instance = load(flyingListDate);
+            instance = load(context, flyingListDate);
         }
 
         return instance;
     }
 
-    private static FlyingList load(Date flyingListDate)
+    private static FlyingList load(Context context, Date flyingListDate)
     {
         //Load from file system if flying list exists for this date
-        return new FlyingList(flyingListDate);
+        return new FlyingList(context, flyingListDate);
     }
 
     public void save()
