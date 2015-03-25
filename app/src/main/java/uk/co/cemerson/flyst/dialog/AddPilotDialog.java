@@ -147,7 +147,7 @@ public class AddPilotDialog extends DialogFragment
 
     private void addMemberToFlyingList(Member member)
     {
-        getFlyingList().addPilot(new Pilot(member, new Date()));
+        getFlyingList().addPilot(new Pilot(getActivity().getApplicationContext(), member, new Date()));
 
         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, new Intent());
 
@@ -198,6 +198,6 @@ public class AddPilotDialog extends DialogFragment
 
     public FlyingList getFlyingList()
     {
-        return FlyingList.getInstance(new Date());
+        return FlyingList.getInstance(getActivity().getApplicationContext(), new Date());
     }
 }
