@@ -146,7 +146,7 @@ public class PilotsFragment extends FlystFragment
 
     private void removePilotFromList(Pilot pilotToRemove)
     {
-        getFlyingList().deletePilot(pilotToRemove);
+        getFlyingList().removePilot(pilotToRemove);
         updatePilotsOnFlyingListView();
     }
 

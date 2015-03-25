@@ -77,9 +77,11 @@ public class FlyingList implements JSONSerializable
     {
         JSONArray gliders = new JSONArray();
 
-        for (Glider glider : mGliders) {
-            gliders.put(glider.toJSON());
-        }
+        //Don't worry about gliders for now until we have implemented them a bit better
+
+//        for (Glider glider : mGliders) {
+//            gliders.put(glider.toJSON());
+//        }
 
         return gliders;
     }
@@ -89,7 +91,7 @@ public class FlyingList implements JSONSerializable
         mPilots.add(pilot);
     }
 
-    public void deletePilot(Pilot pilot)
+    public void removePilot(Pilot pilot)
     {
         mPilots.remove(pilot);
     }

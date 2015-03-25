@@ -188,7 +188,6 @@ public class AddPilotDialog extends DialogFragment
                 pilotAlreadyOnListTextView.setVisibility(View.INVISIBLE);
             }
         }
-
     }
 
     public MemberRepository getMemberRepository()
