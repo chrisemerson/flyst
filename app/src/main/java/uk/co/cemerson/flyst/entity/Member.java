@@ -7,11 +7,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
+import uk.co.cemerson.flyst.repository.FlyingListRepository;
 import uk.co.cemerson.flyst.repository.JSONSerializable;
 
 public class Member implements SimpleFuzzySearchable, JSONSerializable
@@ -89,7 +89,8 @@ public class Member implements SimpleFuzzySearchable, JSONSerializable
 
     public int getFuzzySearchableRank()
     {
-        return FlyingList.getInstance(mContext, new Date()).isMemberOnList(this) ? 0 : 1;
+        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(mContext);
+        return flyingListRepository.getCurrentFlyingList().isMemberOnList(this) ? 0 : 1;
     }
 
     public JSONObject toJSON() throws JSONException

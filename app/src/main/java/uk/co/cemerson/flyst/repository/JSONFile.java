@@ -51,8 +51,6 @@ public class JSONFile
             String jsonString = getStringFromReader(reader);
 
             jsonObject = (JSONObject) readJSONFromString(jsonString);
-        } catch (FileNotFoundException e) {
-            //noop
         } finally {
             closeReaderIfOpen();
         }

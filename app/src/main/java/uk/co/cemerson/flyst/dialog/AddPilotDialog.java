@@ -29,6 +29,7 @@ import uk.co.cemerson.flyst.R;
 import uk.co.cemerson.flyst.entity.FlyingList;
 import uk.co.cemerson.flyst.entity.Member;
 import uk.co.cemerson.flyst.entity.Pilot;
+import uk.co.cemerson.flyst.repository.FlyingListRepository;
 import uk.co.cemerson.flyst.repository.MemberRepository;
 
 public class AddPilotDialog extends DialogFragment
@@ -197,6 +198,8 @@ public class AddPilotDialog extends DialogFragment
 
     public FlyingList getFlyingList()
     {
-        return FlyingList.getInstance(getActivity().getApplicationContext(), new Date());
+        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(getActivity().getApplicationContext());
+
+        return flyingListRepository.getCurrentFlyingList();
     }
 }

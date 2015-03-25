@@ -47,7 +47,7 @@ public class StatusFragment extends TimeTickReceivingFragment
     {
         final Date currentDate = new Date();
 
-        DateFormat machineReadableDateFormatter = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+        DateFormat machineReadableDateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         DateFormat dateFormatter = new SimpleDateFormat("EEEE MMMM d, yyyy", Locale.ENGLISH);
         DateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
 

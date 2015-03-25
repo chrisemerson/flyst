@@ -17,7 +17,7 @@ import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearcher;
 
 public class MemberRepository implements JSONSerializable
 {
-    public static final String LOG_TAG = "uk.co.cemerson.flyst";
+    private static final String LOG_TAG = "uk.co.cemerson.flyst";
     private static final String FILE_KEY = "members";
     private static final String JSON_KEY_MEMBERS = "members";
 

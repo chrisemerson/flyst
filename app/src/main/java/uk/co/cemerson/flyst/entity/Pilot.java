@@ -33,7 +33,10 @@ public class Pilot implements SimpleFuzzySearchable, JSONSerializable
     public Pilot(Context context, Member member, Date dateAdded)
     {
         mContext = context;
+
         mMember = member;
+        mHasFlown = false;
+        mNotes = "";
         mDateAdded = dateAdded;
     }
 

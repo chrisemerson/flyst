@@ -3,43 +3,29 @@ package uk.co.cemerson.flyst.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import java.util.Date;
-
 import uk.co.cemerson.flyst.entity.FlyingList;
-import uk.co.cemerson.flyst.repository.MemberRepository;
+import uk.co.cemerson.flyst.repository.FlyingListRepository;
 
 abstract public class FlystFragment extends Fragment
 {
-    private MemberRepository mMemberRepository;
-    private FlyingList mFlyingList;
+    private static FlyingList mFlyingList = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        mFlyingList = FlyingList.getInstance(getActivity().getApplicationContext(), new Date());
-        mMemberRepository = MemberRepository.getInstance(getActivity().getApplicationContext());
-    }
+        if (mFlyingList == null) {
+            FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(
+                getActivity().getApplicationContext()
+            );
 
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-
-        mFlyingList.save();
-        mFlyingList = null;
-
-        mMemberRepository = null;
+            mFlyingList = flyingListRepository.getCurrentFlyingList();
+        }
     }
 
     protected FlyingList getFlyingList()
     {
         return mFlyingList;
-    }
-
-    protected MemberRepository getMemberRepository()
-    {
-        return mMemberRepository;
     }
 }

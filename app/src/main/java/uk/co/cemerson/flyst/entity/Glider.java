@@ -5,6 +5,7 @@ public class Glider
     private String mRegistration;
     private String mType;
     private boolean mIsTwoSeater;
+    private boolean mIsClubGlider;
 
     public String getRegistration()
     {
@@ -34,5 +35,15 @@ public class Glider
     public void setTwoSeater(boolean isTwoSeater)
     {
         mIsTwoSeater = isTwoSeater;
+    }
+
+    public boolean isClubGlider()
+    {
+        return mIsClubGlider;
+    }
+
+    public void setClubGlider(boolean isClubGlider)
+    {
+        mIsClubGlider = isClubGlider;
     }
 }
