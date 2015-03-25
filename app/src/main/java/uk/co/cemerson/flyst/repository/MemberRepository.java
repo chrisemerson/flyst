@@ -33,7 +33,6 @@ public class MemberRepository implements JSONSerializable
         mContext = context;
         mJSONFile = new JSONFile(context, FILE_KEY);
         mMembers = loadMembersFromStorage(mJSONFile);
-        save();
     }
 
     public static MemberRepository getInstance(Context context)
