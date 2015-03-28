@@ -2,16 +2,18 @@ package uk.co.cemerson.flyst.entity;
 
 public enum InstructorCategory
 {
-    NOT_AN_INSTRUCTOR(0),
-    BASIC_INSTRUCTOR(1),
-    ASSISTANT_CATEGORY_INSTRUCTOR(2),
-    FULL_CATEGORY_INSTRUCTOR(3);
+    NOT_AN_INSTRUCTOR(0, "Not An Instructor"),
+    BASIC_INSTRUCTOR(1, "Basic Instructor"),
+    ASSISTANT_CATEGORY_INSTRUCTOR(2, "Assistant Category Instructor"),
+    FULL_CATEGORY_INSTRUCTOR(3, "Full Category Instructor");
 
     private int mInstructorRank;
+    private String mLabel;
 
-    InstructorCategory(int instructorRank)
+    InstructorCategory(int instructorRank, String label)
     {
         mInstructorRank = instructorRank;
+        mLabel = label;
     }
 
     public static InstructorCategory fromRank(int rank)
@@ -28,5 +30,11 @@ public enum InstructorCategory
     public int getInstructorRank()
     {
         return mInstructorRank;
+    }
+
+    @Override
+    public String toString()
+    {
+        return mLabel;
     }
 }

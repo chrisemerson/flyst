@@ -20,13 +20,22 @@
 
     <string name="add_pilot_button_text">Add Pliot</string>
     <string name="add_pilot_dialog_title">Add Pliot To Flying List</string>
+    <string name="add_member_dialog_title">Add Member</string>
+    <string name="edit_member_dialog_title">Edit Member</string>
     <string name="add_pilot_search_box_hint">Search For Pilot</string>
 
     <string name="label_dashboard_pilots_flown">Pilots on Flying List flown:</string>
     <string name="label_dashboard_no_pilots_on_list">No pilots currently on list</string>
     <string name="add_member_button_text">Add Member</string>
+    <string name="save_member_button_text">Save Member</string>
     <string name="label_time_added_to_list">Time added to list:</string>
     <string name="label_remove_pilot_from_list">Remove Pilot From List</string>
     <string name="label_already_on_flying_list">Already on Flying List</string>
+
+    <string name="label_member_first_name">First Name</string>
+    <string name="label_member_surname">Surname</string>
+    <string name="label_member_is_winch_driver">Winch Driver?</string>
+    <string name="label_member_is_retrieve_driver">Retrieve Driver?</string>
+    <string name="label_member_instructor_category">Instructor Category</string>
 
 </resources>

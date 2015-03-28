@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -36,6 +38,10 @@ public class AddPilotDialog extends DialogFragment
 {
     private EditText mSearchBox;
     private ListView mAutoCompleteBox;
+    private Button mAddMemberButton;
+
+    private static final String DIALOG_EDIT_MEMBER = "dialog_edit_member";
+    private static final int REQUEST_EDIT_MEMBER = 0;
 
     private static final int SEARCH_LIMIT = 6;
 
@@ -47,7 +53,7 @@ public class AddPilotDialog extends DialogFragment
 
         initView(view);
 
-        Dialog dialog = new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
             .setView(view)
             .setTitle(getResources().getString(R.string.add_pilot_dialog_title))
             .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
@@ -59,8 +65,6 @@ public class AddPilotDialog extends DialogFragment
                 }
             })
             .create();
-
-        return dialog;
     }
 
     @Override
@@ -75,10 +79,28 @@ public class AddPilotDialog extends DialogFragment
     {
         mAutoCompleteBox = (ListView) view.findViewById(R.id.pilots_autocomplete_view);
         mSearchBox = (EditText) view.findViewById(R.id.member_search_box);
+        mAddMemberButton = (Button) view.findViewById(R.id.add_member_button);
 
         forceKeyboardAndFocusOnSearchBox();
+        initSearchBoxAutocompleteListener();
+        initAddMemberButton();
+    }
 
-        initSearchBoxAutocompleteListener(view);
+    private void initAddMemberButton()
+    {
+        mAddMemberButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                resetKeyboardForce();
+
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                EditMemberDialog dialog = new EditMemberDialog();
+                dialog.setTargetFragment(AddPilotDialog.this, REQUEST_EDIT_MEMBER);
+                dialog.show(fm, DIALOG_EDIT_MEMBER);
+            }
+        });
     }
 
     private void forceKeyboardAndFocusOnSearchBox()
@@ -95,7 +117,7 @@ public class AddPilotDialog extends DialogFragment
         imm.hideSoftInputFromWindow(mSearchBox.getWindowToken(), 0);
     }
 
-    private void initSearchBoxAutocompleteListener(View view)
+    private void initSearchBoxAutocompleteListener()
     {
         TextWatcher textWatcher = new TextWatcher()
         {
