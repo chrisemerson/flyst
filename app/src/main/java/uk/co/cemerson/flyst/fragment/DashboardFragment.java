@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -22,7 +23,7 @@ public class DashboardFragment extends FlystFragment
     private Button mPilotsButton;
     private Button mGlidersButton;
     private Button mWinchButton;
-    private Button mRetrievesButton;
+    private FrameLayout mRetrievesButton;
 
     private TextView mProgressBarLabel;
     private ProgressBar mProgressBar;
@@ -51,7 +52,7 @@ public class DashboardFragment extends FlystFragment
         mPilotsButton = (Button) view.findViewById(R.id.dashboard_button_pilots);
         mGlidersButton = (Button) view.findViewById(R.id.dashboard_button_gliders);
         mWinchButton = (Button) view.findViewById(R.id.dashboard_button_winch);
-        mRetrievesButton = (Button) view.findViewById(R.id.dashboard_button_retrieves);
+        mRetrievesButton = (FrameLayout) view.findViewById(R.id.dashboard_button_retrieves);
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.flying_list_pilots_flown_progress_bar);
         mProgressBarLabel = (TextView) view.findViewById(R.id.flying_list_pilots_flown_label);

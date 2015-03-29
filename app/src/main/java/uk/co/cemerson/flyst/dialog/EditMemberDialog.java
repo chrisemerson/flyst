@@ -11,12 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.UUID;
 
 import uk.co.cemerson.flyst.R;
 import uk.co.cemerson.flyst.entity.InstructorCategory;
+import uk.co.cemerson.flyst.entity.Member;
+import uk.co.cemerson.flyst.repository.MemberRepository;
 
 public class EditMemberDialog extends DialogFragment
 {
@@ -40,7 +41,14 @@ public class EditMemberDialog extends DialogFragment
             .setView(view)
             .setTitle(getDialogTitle())
             .setPositiveButton(getResources().getString(R.string.save_member_button_text), new SaveMemberListener())
-            .setNegativeButton(android.R.string.cancel, null)
+            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    closeDialogBox(false);
+                }
+            })
             .create();
     }
 
@@ -66,7 +74,7 @@ public class EditMemberDialog extends DialogFragment
 
     private void initInstructorSpinner()
     {
-        ArrayAdapter adapter = new ArrayAdapter<InstructorCategory>(
+        ArrayAdapter<InstructorCategory> adapter = new ArrayAdapter<>(
             getActivity(),
             android.R.layout.simple_spinner_item,
             InstructorCategory.values()
@@ -82,7 +90,35 @@ public class EditMemberDialog extends DialogFragment
         @Override
         public void onClick(DialogInterface dialog, int which)
         {
-            Toast.makeText(getActivity(), "Some Test Text", Toast.LENGTH_SHORT).show();
+            saveMember();
         }
+    }
+
+    private void saveMember()
+    {
+        MemberRepository memberRepository = MemberRepository.getInstance(getActivity().getApplicationContext());
+        Member member;
+
+        if (mMemberID == null) {
+            member = new Member(getActivity().getApplicationContext());
+        } else {
+            member = memberRepository.findByID(mMemberID);
+        }
+
+        member.setFirstName(mFirstName.getText().toString());
+        member.setSurname(mSurname.getText().toString());
+        member.setIsWinchDriver(mIsWinchDriver.isChecked());
+        member.setIsRetrieveDriver(mIsRetrieveDriver.isChecked());
+        member.setInstructorCategory((InstructorCategory) mInstructorCategory.getSelectedItem());
+
+        memberRepository.addMember(member);
+        memberRepository.save();
+
+        closeDialogBox(true);
+    }
+
+    private void closeDialogBox(boolean successResult)
+    {
+
     }
 }

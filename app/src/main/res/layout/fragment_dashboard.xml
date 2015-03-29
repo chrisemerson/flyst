@@ -98,14 +98,24 @@
             android:layout_weight="0"
             android:background="@color/highlight_text"/>
 
-        <Button
+        <FrameLayout
             android:id="@+id/dashboard_button_retrieves"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/activity_name_retrieves"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:gravity="bottom|center"
-            android:textColor="@color/highlight_text"/>
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_retrieves"
+                android:contentDescription="@string/activity_name_retrieves"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:text="@string/activity_name_retrieves"
+                android:textColor="@color/highlight_text"/>
+        </FrameLayout>
     </LinearLayout>
 </LinearLayout>

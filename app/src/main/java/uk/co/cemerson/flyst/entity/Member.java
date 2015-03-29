@@ -46,19 +46,6 @@ public class Member implements SimpleFuzzySearchable, JSONSerializable
         mInstructorCategory = InstructorCategory.NOT_AN_INSTRUCTOR;
     }
 
-    public Member(Context context, String firstName, String surname)
-    {
-        mContext = context;
-
-        mID = UUID.randomUUID();
-
-        mFirstName = firstName;
-        mSurname = surname;
-        mIsWinchDriver = false;
-        mIsRetrieveDriver = false;
-        mInstructorCategory = InstructorCategory.NOT_AN_INSTRUCTOR;
-    }
-
     public Member(Context context, JSONObject jsonObject)
     {
         mContext = context;
@@ -116,11 +103,6 @@ public class Member implements SimpleFuzzySearchable, JSONSerializable
     public UUID getID()
     {
         return mID;
-    }
-
-    public void setID(UUID ID)
-    {
-        mID = ID;
     }
 
     public String getFirstName()
