@@ -26,6 +26,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import uk.co.cemerson.flyst.R;
 import uk.co.cemerson.flyst.entity.FlyingList;
@@ -41,7 +42,7 @@ public class AddPilotDialog extends DialogFragment
     private Button mAddMemberButton;
 
     private static final String DIALOG_EDIT_MEMBER = "dialog_edit_member";
-    private static final int REQUEST_EDIT_MEMBER = 0;
+    private static final int REQUEST_ADD_MEMBER = 0;
 
     private static final int SEARCH_LIMIT = 6;
 
@@ -96,8 +97,8 @@ public class AddPilotDialog extends DialogFragment
                 resetKeyboardForce();
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                EditMemberDialog dialog = new EditMemberDialog();
-                dialog.setTargetFragment(AddPilotDialog.this, REQUEST_EDIT_MEMBER);
+                EditMemberDialog dialog = EditMemberDialog.newInstance(mSearchBox.getText().toString());
+                dialog.setTargetFragment(AddPilotDialog.this, REQUEST_ADD_MEMBER);
                 dialog.show(fm, DIALOG_EDIT_MEMBER);
             }
         });
@@ -223,5 +224,24 @@ public class AddPilotDialog extends DialogFragment
         FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(getActivity().getApplicationContext());
 
         return flyingListRepository.getCurrentFlyingList();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_ADD_MEMBER) {
+            UUID memberID = (UUID) data.getSerializableExtra(EditMemberDialog.EXTRA_MEMBER_ID);
+
+            if (memberID == null) {
+                return;
+            }
+
+            Member member = getMemberRepository().findByID(memberID);
+            addMemberToFlyingList(member);
+        }
     }
 }
