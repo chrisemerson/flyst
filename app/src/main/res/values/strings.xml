@@ -51,4 +51,13 @@
     <string name="delete_member">Delete Member</string>
     <string name="edit_member">Edit Member</string>
 
+    <string name="password_box_hint">Password</string>
+    <string name="password_submit_button">Access System Settings</string>
+    <string name="change_password_button">Change Password</string>
+    <string name="set_password_button">Set Password</string>
+    <string name="change_password_hint_current_password">Current Password</string>
+    <string name="change_password_hint_new_password">New Password</string>
+    <string name="change_password_hint_repeat_new_password">Repeat New Password</string>
+    <string name="clear_password_button">Clear Password</string>
+
 </resources>

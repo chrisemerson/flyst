@@ -125,15 +125,15 @@ public class PilotsFragment extends FlystFragment
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Remove Pilot")
                 .setMessage("Are you sure you want to remove " + pilot.getDisplayName() + " from the Flying List?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        PilotsFragment.this.removePilotFromList(pilot);
+                        removePilotFromList(pilot);
                     }
                 })
-                .setNegativeButton("Cancel", null)
+                .setNegativeButton(android.R.string.cancel, null)
                 .show();
         }
 
