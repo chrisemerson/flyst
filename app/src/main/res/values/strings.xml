@@ -48,4 +48,7 @@
     <string name="settings_section_gliders">Glider Settings</string>
     <string name="settings_section_system">System Settings</string>
 
+    <string name="delete_member">Delete Member</string>
+    <string name="edit_member">Edit Member</string>
+
 </resources>

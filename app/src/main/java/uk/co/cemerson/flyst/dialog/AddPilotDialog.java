@@ -197,12 +197,12 @@ public class AddPilotDialog extends DialogFragment
             return convertView;
         }
 
-        private void initView(View convertView, final Member member)
+        private void initView(View view, Member member)
         {
-            TextView memberNameTextView = (TextView) convertView.findViewById(R.id.member_name);
-            memberNameTextView.setText(member.getDisplayName());
+            TextView memberNameTextView = (TextView) view.findViewById(R.id.member_name);
+            memberNameTextView.setText(member.getDisplayNameFirstNameFirst());
 
-            TextView pilotAlreadyOnListTextView = (TextView) convertView.findViewById(R.id.already_on_list);
+            TextView pilotAlreadyOnListTextView = (TextView) view.findViewById(R.id.already_on_list);
 
             if (getFlyingList().isMemberOnList(member)) {
                 memberNameTextView.setTextColor(getResources().getColor(R.color.greyed_out_text));

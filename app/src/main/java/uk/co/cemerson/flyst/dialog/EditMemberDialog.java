@@ -191,6 +191,7 @@ public class EditMemberDialog extends DialogFragment
 
         if (mMemberID == null) {
             member = new Member(getActivity().getApplicationContext());
+            memberRepository.addMember(member);
         } else {
             member = memberRepository.findByID(mMemberID);
         }
@@ -201,7 +202,6 @@ public class EditMemberDialog extends DialogFragment
         member.setIsRetrieveDriver(mIsRetrieveDriver.isChecked());
         member.setInstructorCategory((InstructorCategory) mInstructorCategory.getSelectedItem());
 
-        memberRepository.addMember(member);
         memberRepository.save();
 
         closeDialog(Activity.RESULT_OK, member.getID());

@@ -9,5 +9,10 @@
         android:textSize="@dimen/main_title_text_size"
         android:textColor="@color/main_title"
         android:text="@string/settings_section_members"
-        android:paddingBottom="@dimen/default_padding"/>
+        android:paddingBottom="@dimen/default_padding_large"/>
+
+    <ListView
+        android:id="@+id/members_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

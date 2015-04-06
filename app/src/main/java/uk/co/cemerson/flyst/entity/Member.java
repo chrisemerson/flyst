@@ -1,6 +1,7 @@
 package uk.co.cemerson.flyst.entity;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -14,7 +15,7 @@ import uk.co.cemerson.flyst.fuzzysearch.SimpleFuzzySearchable;
 import uk.co.cemerson.flyst.repository.FlyingListRepository;
 import uk.co.cemerson.flyst.repository.JSONSerializable;
 
-public class Member implements SimpleFuzzySearchable, JSONSerializable
+public class Member implements SimpleFuzzySearchable, JSONSerializable, Comparable
 {
     private static final String JSON_KEY_ID = "id";
     private static final String JSON_KEY_FIRST_NAME = "firstname";
@@ -95,6 +96,18 @@ public class Member implements SimpleFuzzySearchable, JSONSerializable
     }
 
     @Override
+    public int compareTo(@NonNull Object other)
+    {
+        int surnameComparison = getSurname().compareTo(((Member) other).getSurname());
+
+        if (surnameComparison == 0) {
+            return getFirstName().compareTo(((Member) other).getFirstName());
+        }
+
+        return surnameComparison;
+    }
+
+    @Override
     public String toString()
     {
         return mFirstName + " " + mSurname;
@@ -125,11 +138,6 @@ public class Member implements SimpleFuzzySearchable, JSONSerializable
         mSurname = surname;
     }
 
-    public String getDisplayName()
-    {
-        return getFirstName() + " " + getSurname();
-    }
-
     public boolean isWinchDriver()
     {
         return mIsWinchDriver;
@@ -158,5 +166,38 @@ public class Member implements SimpleFuzzySearchable, JSONSerializable
     public void setInstructorCategory(InstructorCategory instructorCategory)
     {
         mInstructorCategory = instructorCategory;
+    }
+
+    public String getDisplayNameFirstNameFirst()
+    {
+        return getFirstName() + " " + getSurname();
+    }
+
+    public String getDisplayNameSurnameFirst()
+    {
+        return getSurname() + ", " + getFirstName();
+    }
+
+    public String getDisplayCapabilitiesString()
+    {
+        String output = "";
+
+        if (getInstructorCategory().getInstructorRank() > 0) {
+            output += getInstructorCategory().toString();
+
+            if (isWinchDriver() || isRetrieveDriver()) {
+                output += ", ";
+            }
+        }
+
+        if (isWinchDriver() && isRetrieveDriver()) {
+            output += "Winch & Retrieve Driver";
+        } else if (isWinchDriver()) {
+            output += "Winch Driver";
+        } else if (isRetrieveDriver()) {
+            output += "Retrieve Driver";
+        }
+
+        return output;
     }
 }

@@ -167,4 +167,15 @@ public class FlyingList implements JSONSerializable
 
         return false;
     }
+
+    public void removeMemberFromList(Member member)
+    {
+        for (Pilot pilot : mPilots) {
+            if (pilot.getMember() == member) {
+                removePilot(pilot);
+
+                return;
+            }
+        }
+    }
 }

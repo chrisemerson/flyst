@@ -131,6 +131,14 @@ public class MemberRepository implements JSONSerializable
     public void deleteMember(Member member)
     {
         mMembers.remove(member);
+
+        FlyingListRepository.getInstance(mContext).getCurrentFlyingList().removeMemberFromList(member);
+
         save();
+    }
+
+    public List<Member> getAllMembers()
+    {
+        return mMembers;
     }
 }

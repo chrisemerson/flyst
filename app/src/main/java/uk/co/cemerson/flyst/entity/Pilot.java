@@ -89,7 +89,7 @@ public class Pilot implements SimpleFuzzySearchable, JSONSerializable
 
     public String getDisplayName()
     {
-        return mMember.getDisplayName();
+        return mMember.getDisplayNameFirstNameFirst();
     }
 
     public Member getMember()
