@@ -3,7 +3,7 @@
 
     <string name="app_name">Flyst</string>
     <string name="adb_wifi_button_text">ADB WiFi</string>
-    <string name="main_settings_button_text">Settings</string>
+    <string name="main_settings_button_text">System Settings</string>
     <string name="menu_settings_text">Settings</string>
     <string name="label_sunset">Sunset:</string>
     <string name="label_from_now">from now</string>
@@ -37,5 +37,15 @@
     <string name="label_member_is_winch_driver">Winch Driver?</string>
     <string name="label_member_is_retrieve_driver">Retrieve Driver?</string>
     <string name="label_member_instructor_category">Instructor Category</string>
+
+    <string name="settings_button_general">General</string>
+    <string name="settings_button_members">Members</string>
+    <string name="settings_button_gliders">Gliders</string>
+    <string name="settings_button_system">System</string>
+
+    <string name="settings_section_general">General Settings</string>
+    <string name="settings_section_members">Member Settings</string>
+    <string name="settings_section_gliders">Glider Settings</string>
+    <string name="settings_section_system">System Settings</string>
 
 </resources>

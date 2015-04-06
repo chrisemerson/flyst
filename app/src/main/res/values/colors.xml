@@ -11,6 +11,8 @@
     <color name="greyed_out_text">#333333</color>
 
     <color name="upcoming_tasks_background">#bbbbbb</color>
+    <color name="settings_buttons_background">#bbbbbb</color>
+    <color name="settings_pane_background">#eeeeee</color>
 
     <color name="highlight_background">#666666</color>
     <color name="highlight_text">#ffffff</color>

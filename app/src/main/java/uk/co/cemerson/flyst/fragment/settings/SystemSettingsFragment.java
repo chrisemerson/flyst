@@ -1,4 +1,4 @@
-package uk.co.cemerson.flyst.fragment;
+package uk.co.cemerson.flyst.fragment.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +12,17 @@ import android.widget.Button;
 
 import uk.co.cemerson.flyst.R;
 
-public class SettingsFragment extends Fragment
+public class SystemSettingsFragment extends Fragment
 {
     private View mView;
 
-    private final static String ADBWifiPackage = "com.rockolabs.adbkonnect";
-    private final static String ADBWifiActivity = "AdbKonnectActivity";
+    private final static String ADB_WIFI_PACKAGE = "com.rockolabs.adbkonnect";
+    private final static String ADB_WIFI_ACTIVITY = "AdbKonnectActivity";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        mView = inflater.inflate(R.layout.fragment_settings, container, false);
+        mView = inflater.inflate(R.layout.fragment_settings_system, container, false);
 
         setupTemporarySettingsButtons();
 
@@ -38,7 +38,7 @@ public class SettingsFragment extends Fragment
             public void onClick(View v)
             {
                 Intent i = new Intent(Intent.ACTION_MAIN);
-                i.setClassName(ADBWifiPackage, ADBWifiPackage + "." + ADBWifiActivity);
+                i.setClassName(ADB_WIFI_PACKAGE, ADB_WIFI_PACKAGE + "." + ADB_WIFI_ACTIVITY);
 
                 startActivity(i);
             }

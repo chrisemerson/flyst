@@ -3,7 +3,7 @@ package uk.co.cemerson.flyst.activity;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 
-import uk.co.cemerson.flyst.fragment.SettingsFragment;
+import uk.co.cemerson.flyst.fragment.settings.SettingsFragment;
 
 public class SettingsActivity extends FlystBaseActivity
 {

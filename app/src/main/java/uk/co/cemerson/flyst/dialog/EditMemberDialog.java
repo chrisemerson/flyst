@@ -97,7 +97,7 @@ public class EditMemberDialog extends DialogFragment
                 @Override
                 public void onClick(DialogInterface dialog, int which)
                 {
-                    closeDialogBox(Activity.RESULT_CANCELED, null);
+                    closeDialog(Activity.RESULT_CANCELED, null);
                 }
             })
             .create();
@@ -204,10 +204,10 @@ public class EditMemberDialog extends DialogFragment
         memberRepository.addMember(member);
         memberRepository.save();
 
-        closeDialogBox(Activity.RESULT_OK, member.getID());
+        closeDialog(Activity.RESULT_OK, member.getID());
     }
 
-    private void closeDialogBox(int resultCode, UUID memberID)
+    private void closeDialog(int resultCode, UUID memberID)
     {
         if (getTargetFragment() == null) {
             return;
