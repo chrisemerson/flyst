@@ -1,9 +1,7 @@
 package uk.co.cemerson.flyst.fragment.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,14 +19,19 @@ import android.widget.LinearLayout;
 
 import uk.co.cemerson.flyst.R;
 import uk.co.cemerson.flyst.dialog.ChangePasswordDialog;
+import uk.co.cemerson.flyst.dialog.ClearPasswordDialog;
 
 public class SystemSettingsFragment extends Fragment
 {
     private static final String SHARED_PREFS_PASSWORD = "systemsettingspassword";
     private static final String ADB_WIFI_PACKAGE = "com.rockolabs.adbkonnect";
     private static final String ADB_WIFI_ACTIVITY = "AdbKonnectActivity";
+
     private static final String DIALOG_CHANGE_PASSWORD = "change_password_dialog";
+    private static final String DIALOG_CLEAR_PASSWORD = "clear_password_dialog";
+
     private static final int REQUEST_CHANGE_PASSWORD = 0;
+    private static final int REQUEST_CLEAR_PASSWORD = 1;
 
     private SharedPreferences mSharedPreferences;
 
@@ -126,19 +129,10 @@ public class SystemSettingsFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                new AlertDialog.Builder(getActivity())
-                    .setTitle("Clear Password?")
-                    .setMessage("Are you sure you want to remove the password protection from this area?")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which)
-                        {
-                            changePassword(null);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .show();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ClearPasswordDialog dialog = ClearPasswordDialog.newInstance(mSharedPreferences.getString(SHARED_PREFS_PASSWORD, null));
+                dialog.setTargetFragment(SystemSettingsFragment.this, REQUEST_CLEAR_PASSWORD);
+                dialog.show(fm, DIALOG_CLEAR_PASSWORD);
             }
         });
     }
@@ -193,6 +187,10 @@ public class SystemSettingsFragment extends Fragment
         if (requestCode == REQUEST_CHANGE_PASSWORD) {
             String newPassword = data.getStringExtra(ChangePasswordDialog.EXTRA_NEW_PASSWORD);
             changePassword(newPassword);
+        }
+
+        if (requestCode == REQUEST_CLEAR_PASSWORD) {
+            changePassword(null);
         }
     }
 

@@ -59,5 +59,7 @@
     <string name="change_password_hint_new_password">New Password</string>
     <string name="change_password_hint_repeat_new_password">Repeat New Password</string>
     <string name="clear_password_button">Clear Password</string>
+    <string name="clear_password_hint_current_password">Current Password</string>
+    <string name="clear_password_title">Clear Password</string>
 
 </resources>
