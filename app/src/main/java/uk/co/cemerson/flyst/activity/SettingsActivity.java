@@ -1,7 +1,6 @@
 package uk.co.cemerson.flyst.activity;
 
 import android.support.v4.app.Fragment;
-import android.view.Menu;
 
 import uk.co.cemerson.flyst.fragment.settings.SettingsFragment;
 
@@ -14,9 +13,8 @@ public class SettingsActivity extends FlystBaseActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    protected boolean shouldDisplaySettingsButton()
     {
-        //Don't put the settings button on the settings page!
-        return true;
+        return false;
     }
 }

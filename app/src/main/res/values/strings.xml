@@ -61,5 +61,6 @@
     <string name="clear_password_button">Clear Password</string>
     <string name="clear_password_hint_current_password">Current Password</string>
     <string name="clear_password_title">Clear Password</string>
+    <string name="label_up">Up</string>
 
 </resources>

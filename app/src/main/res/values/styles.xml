@@ -7,11 +7,6 @@
     <style name="Flyst.ActionBarStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="height">@dimen/clickable_bar_width</item>
         <item name="background">@color/clickable_bar_background</item>
-        <item name="titleTextStyle">@style/Flyst.TitleTextStyle</item>
-    </style>
-
-    <style name="Flyst.TitleTextStyle" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:textSize">@dimen/clickable_bar_text_size</item>
     </style>
 
 </resources>

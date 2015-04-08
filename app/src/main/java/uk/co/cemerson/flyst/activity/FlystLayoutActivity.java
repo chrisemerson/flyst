@@ -100,4 +100,10 @@ abstract public class FlystLayoutActivity extends FlystBaseActivity implements
     {
         return R.layout.activity_flyst_layout;
     }
+
+    @Override
+    protected boolean shouldDisplaySettingsButton()
+    {
+        return true;
+    }
 }
