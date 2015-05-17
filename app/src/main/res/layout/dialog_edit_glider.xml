@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="600dp"
+    android:padding="@dimen/default_padding">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_padding">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/basic_text"
+                android:textSize="@dimen/field_label"
+                android:text="@string/label_glider_registration"/>
+
+            <EditText
+                android:id="@+id/edit_text_registration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textCapCharacters"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/basic_text"
+                android:textSize="@dimen/field_label"
+                android:text="@string/label_glider_type"/>
+
+            <EditText
+                android:id="@+id/edit_text_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textCapWords"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/checkbox_is_two_seater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_glider_is_two_seater"
+        android:layout_marginBottom="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding_checkbox"/>
+
+    <CheckBox
+        android:id="@+id/checkbox_is_club_glider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_member_is_club_glider"
+        android:layout_marginBottom="@dimen/default_padding"
+        android:paddingLeft="@dimen/default_padding_checkbox"/>
+</LinearLayout>

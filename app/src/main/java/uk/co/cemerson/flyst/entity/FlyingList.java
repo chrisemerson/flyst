@@ -168,6 +168,11 @@ public class FlyingList implements JSONSerializable
         return false;
     }
 
+    public boolean isGliderOnList(Glider glider)
+    {
+        return false;
+    }
+
     public void removeMemberFromList(Member member)
     {
         for (Pilot pilot : mPilots) {
@@ -177,5 +182,9 @@ public class FlyingList implements JSONSerializable
                 return;
             }
         }
+    }
+
+    public void removeGliderFromList(Glider glider)
+    {
     }
 }

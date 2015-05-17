@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+    <TextView
+        android:id="@+id/glider_registration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:textSize="@dimen/basic_text_size"
+        android:textColor="@color/basic_text"/>
+
+    <TextView
+        android:id="@+id/glider_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/glider_registration"
+        android:textSize="@dimen/small_text_size"
+        android:textColor="@color/greyed_out_text"/>
+
+    <ImageButton
+        android:id="@+id/button_delete_glider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/delete_glider"
+        android:src="@android:drawable/ic_menu_delete"
+        android:padding="0dp"
+        android:background="@android:color/transparent"
+        android:layout_marginRight="@dimen/default_padding"/>
+
+    <ImageButton
+        android:id="@+id/button_edit_glider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/button_delete_glider"
+        android:contentDescription="@string/edit_glider"
+        android:src="@android:drawable/ic_menu_edit"
+        android:padding="0dp"
+        android:background="@android:color/transparent"
+        android:layout_marginRight="@dimen/default_padding"/>
+</RelativeLayout>

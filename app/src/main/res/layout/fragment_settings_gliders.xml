@@ -3,11 +3,30 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/main_title_text_size"
-        android:textColor="@color/main_title"
-        android:text="@string/settings_section_gliders"
-        android:paddingBottom="@dimen/default_padding"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:textSize="@dimen/main_title_text_size"
+            android:textColor="@color/main_title"
+            android:text="@string/settings_section_gliders"
+            android:paddingBottom="@dimen/default_padding_large"/>
+
+        <Button
+            android:id="@+id/button_add_glider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:text="@string/add_glider_button_text"
+            android:drawableLeft="@android:drawable/ic_input_add"/>
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/gliders_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

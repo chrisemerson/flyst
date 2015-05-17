@@ -22,12 +22,15 @@
     <string name="add_pilot_dialog_title">Add Pliot To Flying List</string>
     <string name="add_member_dialog_title">Add Member</string>
     <string name="edit_member_dialog_title">Edit Member</string>
+    <string name="add_glider_dialog_title">Add Glider</string>
+    <string name="edit_glider_dialog_title">Edit Glider</string>
     <string name="add_pilot_search_box_hint">Search For Pilot</string>
 
     <string name="label_dashboard_pilots_flown">Pilots on Flying List flown:</string>
     <string name="label_dashboard_no_pilots_on_list">No pilots currently on list</string>
     <string name="add_member_button_text">Add Member</string>
     <string name="save_member_button_text">Save Member</string>
+    <string name="save_glider_button_text">Save Glider</string>
     <string name="label_time_added_to_list">Time added to list:</string>
     <string name="label_remove_pilot_from_list">Remove Pilot From List</string>
     <string name="label_already_on_flying_list">Already on Flying List</string>
@@ -62,5 +65,12 @@
     <string name="clear_password_hint_current_password">Current Password</string>
     <string name="clear_password_title">Clear Password</string>
     <string name="label_up">Up</string>
+    <string name="add_glider_button_text">Add Glider</string>
+    <string name="delete_glider">Delete Glider</string>
+    <string name="edit_glider">Edit Glider</string>
+    <string name="label_glider_is_two_seater">Two Seater?</string>
+    <string name="label_member_is_club_glider">Club Glider?</string>
+    <string name="label_glider_registration">Registration</string>
+    <string name="label_glider_type">Type</string>
 
 </resources>
