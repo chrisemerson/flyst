@@ -10,21 +10,48 @@
         android:textColor="@color/basic_text"
         android:textSize="@dimen/basic_text_size"
         android:paddingTop="@dimen/status_other_padding_top"
+        android:layout_marginRight="32dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"/>
 
-    <TextView
-        android:id="@+id/fragment_status_label_time"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/fragment_status_time"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|top"
-        android:textColor="@color/status_clock"
-        android:textSize="@dimen/status_clock_text_size"
+        android:layout_toRightOf="@id/fragment_status_label_date"
+        android:layout_marginRight="32dp">
+        <TextView
+            android:id="@+id/fragment_status_label_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/status_clock"
+            android:textSize="@dimen/status_clock_text_size"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="@dimen/sunset_icon_size"
+        android:layout_height="@dimen/sunset_icon_size"
+        android:id="@+id/sunsetIcon"
+        android:src="@drawable/sunset_logo"
+        android:scaleType="centerInside"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginRight="6dp"
+        android:layout_toRightOf="@id/fragment_status_time"/>
 
     <TextView
         android:id="@+id/fragment_status_sunset_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/sunsetIcon"
+        android:textColor="@color/basic_text"
+        android:textSize="@dimen/basic_text_size"
+        android:paddingTop="@dimen/status_other_padding_top"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/fragment_status_label_battery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
@@ -35,12 +62,13 @@
         android:layout_alignParentRight="true"/>
 
     <ImageView
-        android:layout_width="@dimen/sunset_icon_size"
-        android:layout_height="@dimen/sunset_icon_size"
-        android:id="@+id/imageView"
-        android:src="@drawable/sunset_logo"
+        android:id="@+id/batteryIcon"
+        android:layout_width="15dp"
+        android:layout_height="@dimen/battery_icon_size"
+        android:src="@drawable/battery_full"
         android:scaleType="centerInside"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="6dp"
-        android:layout_toLeftOf="@id/fragment_status_sunset_text"/>
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="3dp"
+        android:layout_toLeftOf="@id/fragment_status_label_battery"/>
 </RelativeLayout>

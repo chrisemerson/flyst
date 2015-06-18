@@ -18,6 +18,7 @@
     <dimen name="status_other_padding_top">6dp</dimen>
 
     <dimen name="sunset_icon_size">30sp</dimen>
+    <dimen name="battery_icon_size">30sp</dimen>
 
     <dimen name="main_title_text_size">25sp</dimen>
     <dimen name="field_label">15sp</dimen>

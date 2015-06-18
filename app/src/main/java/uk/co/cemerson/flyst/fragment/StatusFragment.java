@@ -1,10 +1,15 @@
 package uk.co.cemerson.flyst.fragment;
 
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -13,8 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import uk.co.cemerson.flyst.util.CranwellSunsetCalculator;
 import uk.co.cemerson.flyst.R;
+import uk.co.cemerson.flyst.util.CranwellSunsetCalculator;
 
 public class StatusFragment extends TimeTickReceivingFragment
 {
@@ -24,7 +29,14 @@ public class StatusFragment extends TimeTickReceivingFragment
 
     private TextView mDateTextView;
     private TextView mSunsetTextView;
+    private TextView mBatteryTextView;
     private TextView mTimeTextView;
+
+    private ImageView mBatteryIconView;
+
+    private static final float BATTERY_EMPTY_THRESHOLD = 3;
+    private static final float BATTERY_LOW_THRESHOLD = 20;
+    private static final float BATTERY_HALF_THRESHOLD = 60;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -32,7 +44,7 @@ public class StatusFragment extends TimeTickReceivingFragment
         mView = inflater.inflate(R.layout.fragment_status, container, false);
 
         setupLayoutElements();
-        updateStatusTimes();
+        updateStatus();
 
         return mView;
     }
@@ -40,11 +52,13 @@ public class StatusFragment extends TimeTickReceivingFragment
     @Override
     protected void onTimeTick()
     {
-        updateStatusTimes();
+        updateStatus();
     }
 
-    public void updateStatusTimes()
+    public void updateStatus()
     {
+        updateBatteryStatus();
+
         final Date currentDate = new Date();
 
         DateFormat machineReadableDateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -58,6 +72,38 @@ public class StatusFragment extends TimeTickReceivingFragment
         mDateTextView.setText(dateFormatter.format(currentDate));
         mTimeTextView.setText(timeFormatter.format(currentDate));
         mSunsetTextView.setText(timeFormatter.format(mSunsetTime) + getTimeToSunsetAsDifferenceString(currentDate));
+    }
+
+    private void updateBatteryStatus()
+    {
+        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        Intent batteryStatus = getActivity().registerReceiver(null, filter);
+
+        try {
+            int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+
+            int batteryLevel = Math.round(100 * level / (float) scale);
+            mBatteryTextView.setText(batteryLevel + "%");
+
+            int batteryResource = R.drawable.battery_full;
+
+            if (batteryLevel < BATTERY_HALF_THRESHOLD) {
+                batteryResource = R.drawable.battery_half;
+            }
+
+            if (batteryLevel < BATTERY_LOW_THRESHOLD) {
+                batteryResource = R.drawable.battery_low;
+            }
+
+            if (batteryLevel < BATTERY_EMPTY_THRESHOLD) {
+                batteryResource = R.drawable.battery_empty;
+            }
+
+            mBatteryIconView.setImageResource(batteryResource);
+        } catch (NullPointerException e) {
+            Log.e("uk.co.cemerson.flyst", "Error updating battery level", e);
+        }
     }
 
     private String getTimeToSunsetAsDifferenceString(Date measureFrom)
@@ -96,6 +142,9 @@ public class StatusFragment extends TimeTickReceivingFragment
         mDateTextView = (TextView) mView.findViewById(R.id.fragment_status_label_date);
         mSunsetTextView = (TextView) mView.findViewById(R.id.fragment_status_sunset_text);
         mTimeTextView = (TextView) mView.findViewById(R.id.fragment_status_label_time);
+        mBatteryTextView = (TextView) mView.findViewById(R.id.fragment_status_label_battery);
+
+        mBatteryIconView = (ImageView) mView.findViewById(R.id.batteryIcon);
 
         if (mSunsetTime == null) {
             initSunsetTime();
