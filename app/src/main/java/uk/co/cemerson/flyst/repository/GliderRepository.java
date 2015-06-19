@@ -23,22 +23,19 @@ public class GliderRepository implements JSONSerializable
     private JSONFile mJSONFile;
     private List<Glider> mGliders;
 
-    private GlidersLoadedListener mListener;
-
     private static GliderRepository instance = null;
 
-    private GliderRepository(Context context, GlidersLoadedListener listener)
+    private GliderRepository(Context context)
     {
         mContext = context;
         mJSONFile = new JSONFile(context, FILE_KEY);
         mGliders = loadGlidersFromStorage(mJSONFile);
-        mListener = listener;
     }
 
-    public static GliderRepository getInstance(Context context, GlidersLoadedListener listener)
+    public static GliderRepository getInstance(Context context)
     {
         if (instance == null) {
-            instance = new GliderRepository(context, listener);
+            instance = new GliderRepository(context);
         }
 
         return instance;
@@ -72,11 +69,6 @@ public class GliderRepository implements JSONSerializable
             }
         } catch (Exception e) {
             Log.e("uk.co.cemerson.flyst", "Error loading gliders: ", e);
-        }
-
-        if (mListener != null) {
-            mListener.onGlidersLoaded();
-            mListener = null;
         }
 
         return loadedGliders;
@@ -113,7 +105,7 @@ public class GliderRepository implements JSONSerializable
     {
         mGliders.remove(glider);
 
-        FlyingListRepository.getInstance(mContext, null).getCurrentFlyingList().removeGliderFromList(glider);
+        FlyingListRepository.getInstance(mContext).getCurrentFlyingList().removeGliderFromList(glider);
 
         save();
     }
@@ -121,10 +113,5 @@ public class GliderRepository implements JSONSerializable
     public List<Glider> getAllGliders()
     {
         return mGliders;
-    }
-
-    public interface GlidersLoadedListener
-    {
-        void onGlidersLoaded();
     }
 }

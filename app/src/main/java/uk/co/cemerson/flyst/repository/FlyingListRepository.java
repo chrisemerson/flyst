@@ -22,19 +22,17 @@ public class FlyingListRepository
     private static FlyingListRepository instance = null;
     private static FlyingList mFlyingList = null;
 
-    private FlyingListLoadedListener mListener;
 
-    private FlyingListRepository(Context context, FlyingListLoadedListener listener)
+    private FlyingListRepository(Context context)
     {
         mContext = context;
         mFlyingList = findByDate(new Date());
-        mListener = listener;
     }
 
-    public static FlyingListRepository getInstance(Context context, FlyingListLoadedListener listener)
+    public static FlyingListRepository getInstance(Context context)
     {
         if (instance == null) {
-            instance = new FlyingListRepository(context, listener);
+            instance = new FlyingListRepository(context);
         }
 
         return instance;
@@ -63,11 +61,6 @@ public class FlyingListRepository
             save(flyingList);
         }
 
-        if (mListener != null) {
-            mListener.onFlyingListLoaded();
-            mListener = null;
-        }
-
         return flyingList;
     }
 
@@ -85,10 +78,5 @@ public class FlyingListRepository
     private String getFilenameFromDate(Date flyingListDate)
     {
         return FILE_KEY + "-" + new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(flyingListDate);
-    }
-
-    public interface FlyingListLoadedListener
-    {
-        void onFlyingListLoaded();
     }
 }

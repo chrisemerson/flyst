@@ -74,10 +74,7 @@ public class EditGliderDialog extends DialogFragment
         if (args != null) {
             String registration = args.getString(EXTRA_REGISTRATION);
 
-            GliderRepository gliderRepository = GliderRepository.getInstance(
-                getActivity().getApplicationContext(),
-                null
-            );
+            GliderRepository gliderRepository = GliderRepository.getInstance(getActivity().getApplicationContext());
 
             Glider glider = gliderRepository.findByRegistration(registration);
 
@@ -118,10 +115,7 @@ public class EditGliderDialog extends DialogFragment
 
     private void saveMember()
     {
-        GliderRepository gliderRepository = GliderRepository.getInstance(
-            getActivity().getApplicationContext(),
-            null
-        );
+        GliderRepository gliderRepository = GliderRepository.getInstance(getActivity().getApplicationContext());
 
         Glider glider;
 

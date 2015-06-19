@@ -96,7 +96,7 @@ public class FlyingList implements JSONSerializable
 
     private void save()
     {
-        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(mContext, null);
+        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(mContext);
         flyingListRepository.save(this);
     }
 

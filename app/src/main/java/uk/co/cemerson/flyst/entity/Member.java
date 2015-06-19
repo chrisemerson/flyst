@@ -77,7 +77,7 @@ public class Member implements SimpleFuzzySearchable, JSONSerializable, Comparab
 
     public int getFuzzySearchableRank()
     {
-        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(mContext, null);
+        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(mContext);
         return flyingListRepository.getCurrentFlyingList().isMemberOnList(this) ? 0 : 1;
     }
 

@@ -26,22 +26,19 @@ public class MemberRepository implements JSONSerializable
     private JSONFile mJSONFile;
     private List<Member> mMembers;
 
-    private MembersLoadedListener mListener;
-
     private static MemberRepository instance = null;
 
-    private MemberRepository(Context context, MembersLoadedListener listener)
+    private MemberRepository(Context context)
     {
         mContext = context;
         mJSONFile = new JSONFile(context, FILE_KEY);
         mMembers = loadMembersFromStorage(mJSONFile);
-        mListener = listener;
     }
 
-    public static MemberRepository getInstance(Context context, MembersLoadedListener listener)
+    public static MemberRepository getInstance(Context context)
     {
         if (instance == null) {
-            instance = new MemberRepository(context, listener);
+            instance = new MemberRepository(context);
         }
 
         return instance;
@@ -80,11 +77,6 @@ public class MemberRepository implements JSONSerializable
             }
         } catch (Exception e) {
             Log.e("uk.co.cemerson.flyst", "Error loading members: ", e);
-        }
-
-        if (mListener != null) {
-            mListener.onMembersLoaded();
-            mListener = null;
         }
 
         return loadedMembers;
@@ -136,7 +128,7 @@ public class MemberRepository implements JSONSerializable
     {
         mMembers.remove(member);
 
-        FlyingListRepository.getInstance(mContext, null).getCurrentFlyingList().removeMemberFromList(member);
+        FlyingListRepository.getInstance(mContext).getCurrentFlyingList().removeMemberFromList(member);
 
         save();
     }
@@ -144,10 +136,5 @@ public class MemberRepository implements JSONSerializable
     public List<Member> getAllMembers()
     {
         return mMembers;
-    }
-
-    public interface MembersLoadedListener
-    {
-        void onMembersLoaded();
     }
 }
