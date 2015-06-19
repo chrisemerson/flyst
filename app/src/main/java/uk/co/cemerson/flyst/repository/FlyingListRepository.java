@@ -1,7 +1,6 @@
 package uk.co.cemerson.flyst.repository;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -69,7 +68,13 @@ public class FlyingListRepository
 
     public void save(FlyingList flyingList)
     {
-        new FlyingListSaver().execute(flyingList);
+        JSONFile jsonFile = getJSONFileInstanceFromDate(flyingList.getFlyingListDate());
+
+        try {
+            jsonFile.writeJSON(flyingList);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Error saving flying list to filesystem");
+        }
     }
 
     private JSONFile getJSONFileInstanceFromDate(Date flyingListDate)
@@ -80,22 +85,5 @@ public class FlyingListRepository
     private String getFilenameFromDate(Date flyingListDate)
     {
         return FILE_KEY + "-" + new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(flyingListDate);
-    }
-
-    private class FlyingListSaver extends AsyncTask<FlyingList, Void, Void>
-    {
-        @Override
-        protected Void doInBackground(FlyingList... flyingList)
-        {
-            JSONFile jsonFile = getJSONFileInstanceFromDate(flyingList[0].getFlyingListDate());
-
-            try {
-                jsonFile.writeJSON(flyingList[0]);
-            } catch (Exception e) {
-                Log.e(LOG_TAG, "Error saving flying list to filesystem");
-            }
-
-            return null;
-        }
     }
 }
