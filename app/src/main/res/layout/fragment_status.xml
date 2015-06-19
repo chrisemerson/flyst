@@ -69,6 +69,6 @@
         android:scaleType="centerInside"
         android:layout_marginTop="6dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="3dp"
+        android:layout_marginRight="6dp"
         android:layout_toLeftOf="@id/fragment_status_label_battery"/>
 </RelativeLayout>
