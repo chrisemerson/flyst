@@ -23,19 +23,22 @@ public class GliderRepository implements JSONSerializable
     private JSONFile mJSONFile;
     private List<Glider> mGliders;
 
+    private GlidersLoadedListener mListener;
+
     private static GliderRepository instance = null;
 
-    private GliderRepository(Context context)
+    private GliderRepository(Context context, GlidersLoadedListener listener)
     {
         mContext = context;
         mJSONFile = new JSONFile(context, FILE_KEY);
         mGliders = loadGlidersFromStorage(mJSONFile);
+        mListener = listener;
     }
 
-    public static GliderRepository getInstance(Context context)
+    public static GliderRepository getInstance(Context context, GlidersLoadedListener listener)
     {
         if (instance == null) {
-            instance = new GliderRepository(context);
+            instance = new GliderRepository(context, listener);
         }
 
         return instance;
@@ -61,7 +64,7 @@ public class GliderRepository implements JSONSerializable
         ArrayList<Glider> loadedGliders = new ArrayList<>();
 
         try {
-            JSONObject loadedData = jsonFile.getJSON();
+            JSONObject loadedData = jsonFile.readJSON();
             JSONArray glidersArray = loadedData.getJSONArray(JSON_KEY_GLIDERS);
 
             for (int i = 0; i < glidersArray.length(); i++) {
@@ -69,6 +72,11 @@ public class GliderRepository implements JSONSerializable
             }
         } catch (Exception e) {
             Log.e("uk.co.cemerson.flyst", "Error loading gliders: ", e);
+        }
+
+        if (mListener != null) {
+            mListener.onGlidersLoaded();
+            mListener = null;
         }
 
         return loadedGliders;
@@ -81,13 +89,8 @@ public class GliderRepository implements JSONSerializable
 
     public void saveGlidersToStorage(JSONFile jsonFile)
     {
-        try {
-            jsonFile.writeJSON(this);
-        } catch (Exception e) {
-            Log.e(LOG_TAG, "Error saving gliders: ", e);
-        }
+        jsonFile.writeJSON(this);
     }
-
 
     public Glider findByRegistration(String registration)
     {
@@ -110,7 +113,7 @@ public class GliderRepository implements JSONSerializable
     {
         mGliders.remove(glider);
 
-        FlyingListRepository.getInstance(mContext).getCurrentFlyingList().removeGliderFromList(glider);
+        FlyingListRepository.getInstance(mContext, null).getCurrentFlyingList().removeGliderFromList(glider);
 
         save();
     }
@@ -118,5 +121,10 @@ public class GliderRepository implements JSONSerializable
     public List<Glider> getAllGliders()
     {
         return mGliders;
+    }
+
+    public interface GlidersLoadedListener
+    {
+        void onGlidersLoaded();
     }
 }

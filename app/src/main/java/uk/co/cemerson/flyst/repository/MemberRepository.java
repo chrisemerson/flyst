@@ -26,19 +26,22 @@ public class MemberRepository implements JSONSerializable
     private JSONFile mJSONFile;
     private List<Member> mMembers;
 
+    private MembersLoadedListener mListener;
+
     private static MemberRepository instance = null;
 
-    private MemberRepository(Context context)
+    private MemberRepository(Context context, MembersLoadedListener listener)
     {
         mContext = context;
         mJSONFile = new JSONFile(context, FILE_KEY);
         mMembers = loadMembersFromStorage(mJSONFile);
+        mListener = listener;
     }
 
-    public static MemberRepository getInstance(Context context)
+    public static MemberRepository getInstance(Context context, MembersLoadedListener listener)
     {
         if (instance == null) {
-            instance = new MemberRepository(context);
+            instance = new MemberRepository(context, listener);
         }
 
         return instance;
@@ -69,7 +72,7 @@ public class MemberRepository implements JSONSerializable
         ArrayList<Member> loadedMembers = new ArrayList<>();
 
         try {
-            JSONObject loadedData = jsonFile.getJSON();
+            JSONObject loadedData = jsonFile.readJSON();
             JSONArray membersArray = loadedData.getJSONArray(JSON_KEY_MEMBERS);
 
             for (int i = 0; i < membersArray.length(); i++) {
@@ -79,16 +82,17 @@ public class MemberRepository implements JSONSerializable
             Log.e("uk.co.cemerson.flyst", "Error loading members: ", e);
         }
 
+        if (mListener != null) {
+            mListener.onMembersLoaded();
+            mListener = null;
+        }
+
         return loadedMembers;
     }
 
     private void saveMembersToStorage(JSONFile jsonFile)
     {
-        try {
-            jsonFile.writeJSON(this);
-        } catch (Exception e) {
-            Log.e(LOG_TAG, "Error saving members: ", e);
-        }
+        jsonFile.writeJSON(this);
     }
 
     public List<Member> searchForMemberByName(String searchTerm, int limit)
@@ -132,7 +136,7 @@ public class MemberRepository implements JSONSerializable
     {
         mMembers.remove(member);
 
-        FlyingListRepository.getInstance(mContext).getCurrentFlyingList().removeMemberFromList(member);
+        FlyingListRepository.getInstance(mContext, null).getCurrentFlyingList().removeMemberFromList(member);
 
         save();
     }
@@ -140,5 +144,10 @@ public class MemberRepository implements JSONSerializable
     public List<Member> getAllMembers()
     {
         return mMembers;
+    }
+
+    public interface MembersLoadedListener
+    {
+        void onMembersLoaded();
     }
 }

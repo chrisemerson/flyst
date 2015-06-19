@@ -1,13 +1,14 @@
 package uk.co.cemerson.flyst.repository;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,84 +19,74 @@ import java.io.Writer;
 public class JSONFile
 {
     private final Context mContext;
-    private final String mFileKey;
+    private final String mFilename;
+
     private BufferedReader reader = null;
 
     public JSONFile(Context context, String fileKey)
     {
         mContext = context;
-        mFileKey = fileKey;
+        mFilename = fileKey + ".json";
     }
 
-    public void writeJSON(JSONSerializable object) throws JSONException, IOException
+    public void writeJSON(JSONSerializable object)
     {
-        Writer writer = null;
-
-        try {
-            OutputStream out = mContext.openFileOutput(getFilename(), Context.MODE_PRIVATE);
-            writer = new OutputStreamWriter(out);
-            writer.write(object.toJSON().toString());
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
-        }
+        new FileWriterTask().execute(mContext, mFilename, object);
     }
 
-    public JSONObject getJSON() throws IOException, JSONException
+    public JSONObject readJSON() throws IOException, JSONException
     {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            initReader();
-            String jsonString = getStringFromReader(reader);
+            InputStream in = mContext.openFileInput(mFilename);
+            reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder jsonString1 = new StringBuilder();
+            String line;
 
-            jsonObject = (JSONObject) readJSONFromString(jsonString);
+            while ((line = reader.readLine()) != null) {
+                jsonString1.append(line);
+            }
+
+            String jsonString = jsonString1.toString();
+
+            jsonObject = (JSONObject) new JSONTokener(jsonString).nextValue();
         } finally {
-            closeReaderIfOpen();
+            if (reader != null) {
+                reader.close();
+                reader = null;
+            }
         }
 
         return jsonObject;
     }
 
-    private Object readJSONFromString(String jsonString) throws JSONException
+    private class FileWriterTask extends AsyncTask<Object, Void, Void>
     {
-        return new JSONTokener(jsonString).nextValue();
-    }
+        @Override
+        protected Void doInBackground(Object... params)
+        {
+            Context context = (Context) params[0];
+            String filename = (String) params[1];
+            JSONSerializable object = (JSONSerializable) params[2];
 
-    private void initReader() throws FileNotFoundException
-    {
-        InputStream in = getInputStream();
-        reader = new BufferedReader(new InputStreamReader(in));
-    }
+            Writer writer = null;
 
-    private String getStringFromReader(BufferedReader reader) throws IOException
-    {
-        StringBuilder jsonString = new StringBuilder();
-        String line;
+            try {
+                try {
+                    OutputStream out = context.openFileOutput(filename, Context.MODE_PRIVATE);
+                    writer = new OutputStreamWriter(out);
+                    writer.write(object.toJSON().toString());
+                } finally {
+                    if (writer != null) {
+                        writer.close();
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("uk.co.cemerson.flyst", "Could not write JSON to file", e);
+            }
 
-        while ((line = reader.readLine()) != null) {
-            jsonString.append(line);
+            return null;
         }
-
-        return jsonString.toString();
-    }
-
-    private void closeReaderIfOpen() throws IOException
-    {
-        if (reader != null) {
-            reader.close();
-            reader = null;
-        }
-    }
-
-    private InputStream getInputStream() throws FileNotFoundException
-    {
-        return mContext.openFileInput(getFilename());
-    }
-
-    private String getFilename()
-    {
-        return mFileKey + ".json";
     }
 }

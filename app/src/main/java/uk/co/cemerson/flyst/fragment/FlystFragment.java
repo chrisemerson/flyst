@@ -17,7 +17,8 @@ abstract public class FlystFragment extends Fragment
 
         if (mFlyingList == null) {
             FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(
-                getActivity().getApplicationContext()
+                getActivity().getApplicationContext(),
+                null
             );
 
             mFlyingList = flyingListRepository.getCurrentFlyingList();

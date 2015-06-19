@@ -47,7 +47,7 @@ public class MemberSettingsFragment extends Fragment
 
     private void initView(View view)
     {
-        mMemberRepository = MemberRepository.getInstance(getActivity().getApplicationContext());
+        mMemberRepository = MemberRepository.getInstance(getActivity().getApplicationContext(), null);
         mAllMembers = (ArrayList<Member>) mMemberRepository.getAllMembers();
 
         Collections.sort(mAllMembers);
@@ -103,7 +103,7 @@ public class MemberSettingsFragment extends Fragment
                 @Override
                 public void onClick(View v)
                 {
-                    FlyingList flyingList = FlyingListRepository.getInstance(getContext()).getCurrentFlyingList();
+                    FlyingList flyingList = FlyingListRepository.getInstance(getContext(), null).getCurrentFlyingList();
                     String message = "Are you sure you want to remove "
                             + member.getDisplayNameFirstNameFirst()
                             + "? This action cannot be undone.";

@@ -48,7 +48,7 @@ public class GliderSettingsFragment extends Fragment
 
     private void initView(View view)
     {
-        mGliderRepository = GliderRepository.getInstance(getActivity().getApplicationContext());
+        mGliderRepository = GliderRepository.getInstance(getActivity().getApplicationContext(), null);
         mAllGliders = (ArrayList<Glider>) mGliderRepository.getAllGliders();
 
         Collections.sort(mAllGliders);
@@ -118,7 +118,7 @@ public class GliderSettingsFragment extends Fragment
                 @Override
                 public void onClick(View v)
                 {
-                    FlyingList flyingList = FlyingListRepository.getInstance(getContext()).getCurrentFlyingList();
+                    FlyingList flyingList = FlyingListRepository.getInstance(getContext(), null).getCurrentFlyingList();
                     String message =
                         "Are you sure you want to remove "
                         + glider.getType() + " '" + glider.getRegistration() + "'"

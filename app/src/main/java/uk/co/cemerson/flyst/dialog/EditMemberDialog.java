@@ -108,7 +108,11 @@ public class EditMemberDialog extends DialogFragment
         UUID memberID = (UUID) getArguments().getSerializable(EXTRA_MEMBER_ID);
 
         if (memberID != null) {
-            MemberRepository memberRepository = MemberRepository.getInstance(getActivity().getApplicationContext());
+            MemberRepository memberRepository = MemberRepository.getInstance(
+                getActivity().getApplicationContext(),
+                null
+            );
+
             Member member = memberRepository.findByID(memberID);
 
             mMemberID = memberID;
@@ -186,7 +190,11 @@ public class EditMemberDialog extends DialogFragment
 
     private void saveMember()
     {
-        MemberRepository memberRepository = MemberRepository.getInstance(getActivity().getApplicationContext());
+        MemberRepository memberRepository = MemberRepository.getInstance(
+            getActivity().getApplicationContext(),
+            null
+        );
+
         Member member;
 
         if (mMemberID == null) {

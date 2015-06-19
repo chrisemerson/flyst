@@ -216,12 +216,15 @@ public class AddPilotDialog extends DialogFragment
 
     public MemberRepository getMemberRepository()
     {
-        return MemberRepository.getInstance(getActivity().getApplicationContext());
+        return MemberRepository.getInstance(getActivity().getApplicationContext(), null);
     }
 
     public FlyingList getFlyingList()
     {
-        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(getActivity().getApplicationContext());
+        FlyingListRepository flyingListRepository = FlyingListRepository.getInstance(
+            getActivity().getApplicationContext(),
+            null
+        );
 
         return flyingListRepository.getCurrentFlyingList();
     }

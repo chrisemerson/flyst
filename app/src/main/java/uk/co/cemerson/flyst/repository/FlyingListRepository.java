@@ -22,15 +22,19 @@ public class FlyingListRepository
     private static FlyingListRepository instance = null;
     private static FlyingList mFlyingList = null;
 
-    private FlyingListRepository(Context context)
+    private FlyingListLoadedListener mListener;
+
+    private FlyingListRepository(Context context, FlyingListLoadedListener listener)
     {
         mContext = context;
+        mFlyingList = findByDate(new Date());
+        mListener = listener;
     }
 
-    public static FlyingListRepository getInstance(Context context)
+    public static FlyingListRepository getInstance(Context context, FlyingListLoadedListener listener)
     {
         if (instance == null) {
-            instance = new FlyingListRepository(context);
+            instance = new FlyingListRepository(context, listener);
         }
 
         return instance;
@@ -38,10 +42,6 @@ public class FlyingListRepository
 
     public FlyingList getCurrentFlyingList()
     {
-        if (mFlyingList == null) {
-            mFlyingList = findByDate(new Date());
-        }
-
         return mFlyingList;
     }
 
@@ -51,7 +51,7 @@ public class FlyingListRepository
         FlyingList flyingList;
 
         try {
-            JSONObject jsonFlyingList = jsonFile.getJSON();
+            JSONObject jsonFlyingList = jsonFile.readJSON();
             flyingList = new FlyingList(mContext, jsonFlyingList);
         } catch (FileNotFoundException e) {
             flyingList = new FlyingList(mContext, flyingListDate);
@@ -63,18 +63,18 @@ public class FlyingListRepository
             save(flyingList);
         }
 
+        if (mListener != null) {
+            mListener.onFlyingListLoaded();
+            mListener = null;
+        }
+
         return flyingList;
     }
 
     public void save(FlyingList flyingList)
     {
         JSONFile jsonFile = getJSONFileInstanceFromDate(flyingList.getFlyingListDate());
-
-        try {
-            jsonFile.writeJSON(flyingList);
-        } catch (Exception e) {
-            Log.e(LOG_TAG, "Error saving flying list to filesystem");
-        }
+        jsonFile.writeJSON(flyingList);
     }
 
     private JSONFile getJSONFileInstanceFromDate(Date flyingListDate)
@@ -85,5 +85,10 @@ public class FlyingListRepository
     private String getFilenameFromDate(Date flyingListDate)
     {
         return FILE_KEY + "-" + new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(flyingListDate);
+    }
+
+    public interface FlyingListLoadedListener
+    {
+        void onFlyingListLoaded();
     }
 }

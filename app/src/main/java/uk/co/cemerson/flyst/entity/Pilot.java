@@ -44,7 +44,7 @@ public class Pilot implements SimpleFuzzySearchable, JSONSerializable
     {
         mContext = context;
 
-        MemberRepository memberRepository = MemberRepository.getInstance(mContext);
+        MemberRepository memberRepository = MemberRepository.getInstance(mContext, null);
 
         try {
             mMember = memberRepository.findByID(UUID.fromString(jsonObject.getString(JSON_KEY_MEMBER)));
