@@ -23,6 +23,7 @@
     <string name="add_member_dialog_title">Add Member</string>
     <string name="edit_member_dialog_title">Edit Member</string>
     <string name="add_glider_dialog_title">Add Glider</string>
+    <string name="add_glider_to_list_dialog_title">Add Glider To Flying List</string>
     <string name="edit_glider_dialog_title">Edit Glider</string>
     <string name="add_pilot_search_box_hint">Search For Pilot</string>
 

@@ -114,4 +114,30 @@ public class GliderRepository implements JSONSerializable
     {
         return mGliders;
     }
+
+    public List<Glider> getAllClubGliders()
+    {
+        List<Glider> clubGliders = new ArrayList<>();
+
+        for (Glider glider : mGliders) {
+            if (glider.isClubGlider()) {
+                clubGliders.add(glider);
+            }
+        }
+
+        return clubGliders;
+    }
+
+    public List<Glider> getAllNonClubGliders()
+    {
+        List<Glider> nonClubGliders = new ArrayList<>();
+
+        for (Glider glider : mGliders) {
+            if (!glider.isClubGlider()) {
+                nonClubGliders.add(glider);
+            }
+        }
+
+        return nonClubGliders;
+    }
 }
