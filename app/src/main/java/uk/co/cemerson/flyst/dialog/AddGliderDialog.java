@@ -1,12 +1,15 @@
 package uk.co.cemerson.flyst.dialog;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import java.util.List;
 import uk.co.cemerson.flyst.R;
 import uk.co.cemerson.flyst.entity.FlyingList;
 import uk.co.cemerson.flyst.entity.Glider;
+import uk.co.cemerson.flyst.entity.GliderQueue;
 import uk.co.cemerson.flyst.repository.FlyingListRepository;
 import uk.co.cemerson.flyst.repository.GliderRepository;
 
@@ -44,31 +48,36 @@ public class AddGliderDialog extends DialogFragment
 
         clubGlidersView.setAdapter(new GliderGridAdapter((ArrayList<Glider>) getClubGliders()));
         otherGlidersView.setAdapter(new GliderGridAdapter((ArrayList<Glider>) getOtherGliders()));
+
+        clubGlidersView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Glider glider = (Glider) parent.getItemAtPosition(position);
+
+                if (!getFlyingList().isGliderOnList(glider)) {
+                    addGliderToFlyingList((Glider) parent.getItemAtPosition(position));
+                }
+            }
+        });
+    }
+
+    private void addGliderToFlyingList(Glider glider)
+    {
+        getFlyingList().addGliderQueue(new GliderQueue(glider));
+        getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, new Intent());
+        getDialog().dismiss();
     }
 
     private List<Glider> getClubGliders()
     {
-        return getAllGlidersNotOnFlyingList(getGliderRepository().getAllClubGliders());
+        return getGliderRepository().getAllClubGliders();
     }
 
     private List<Glider> getOtherGliders()
     {
-        return getAllGlidersNotOnFlyingList(getGliderRepository().getAllNonClubGliders());
-    }
-
-    private List<Glider> getAllGlidersNotOnFlyingList(List<Glider> gliders)
-    {
-        FlyingList flyingList = getFlyingList();
-
-        List<Glider> glidersNotOnList = new ArrayList<>();
-
-        for (Glider glider : gliders) {
-            if (!flyingList.isGliderOnList(glider)) {
-                glidersNotOnList.add(glider);
-            }
-        }
-
-        return glidersNotOnList;
+        return getGliderRepository().getAllNonClubGliders();
     }
 
     private class GliderGridAdapter extends ArrayAdapter<Glider>
@@ -96,6 +105,11 @@ public class AddGliderDialog extends DialogFragment
 
             gliderRegistrationTextView.setText(glider.getRegistration());
             gliderTypeTextView.setText(glider.getType());
+
+            if (getFlyingList().isGliderOnList(glider)) {
+                gliderRegistrationTextView.setTextColor(getResources().getColor(R.color.greyed_out_text));
+                gliderTypeTextView.setTextColor(getResources().getColor(R.color.greyed_out_text));
+            }
         }
     }
 

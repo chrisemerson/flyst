@@ -1,5 +1,7 @@
 package uk.co.cemerson.flyst.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -35,5 +37,18 @@ public class GlidersFragment extends FlystFragment
         });
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_ADD_GLIDER) {
+            updateGlidersOnFlyingListView();
+        }
+    }
+
+    private void updateGlidersOnFlyingListView()
+    {
+
     }
 }

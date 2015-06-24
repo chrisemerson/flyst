@@ -26,7 +26,7 @@ public class FlyingList implements JSONSerializable
     private Date mFlyingListDate;
 
     private List<Pilot> mPilots = new ArrayList<>();
-    private List<Glider> mGliders = new ArrayList<>();
+    private List<GliderQueue> mGliderQueues = new ArrayList<>();
 
     public FlyingList(Context context, Date flyingListDate)
     {
@@ -46,10 +46,11 @@ public class FlyingList implements JSONSerializable
                 mPilots.add(new Pilot(mContext, pilotsArray.getJSONObject(i)));
             }
 
+// TODO: Load Glider Queues
 //            JSONArray glidersArray = jsonObject.getJSONArray(JSON_KEY_GLIDERS);
 //
 //            for (int i = 0; i < glidersArray.length(); i++) {
-//                mGliders.add(new Glider(mContext, glidersArray.getJSONObject(i)));
+//                mGliderQueues.add(new GliderQueue(mContext, glidersArray.getJSONObject(i)));
 //            }
 
         } catch (JSONException e) {
@@ -65,7 +66,7 @@ public class FlyingList implements JSONSerializable
 
         jsonObject.put(JSON_KEY_FLYING_LIST_DATE, mFlyingListDate.getTime());
         jsonObject.put(JSON_KEY_PILOTS, getPilotsJSONArray());
-        jsonObject.put(JSON_KEY_GLIDERS, getGlidersJSONArray());
+        jsonObject.put(JSON_KEY_GLIDERS, getGliderQueuesJSONArray());
 
         return jsonObject;
     }
@@ -81,11 +82,12 @@ public class FlyingList implements JSONSerializable
         return pilots;
     }
 
-    private JSONArray getGlidersJSONArray() throws JSONException
+    private JSONArray getGliderQueuesJSONArray() throws JSONException
     {
         JSONArray gliders = new JSONArray();
 
-        //Don't worry about gliders for now until we have implemented them a bit better
+        //TODO: Return Glider Queues for saving
+        //Don't worry about glider queues for now until we have implemented them a bit better
 
 //        for (Glider glider : mGliders) {
 //            gliders.put(glider.toJSON());
@@ -122,21 +124,21 @@ public class FlyingList implements JSONSerializable
         return mPilots;
     }
 
-    public void addGlider(Glider glider)
+    public void addGliderQueue(GliderQueue gliderQueue)
     {
-        mGliders.add(glider);
+        mGliderQueues.add(gliderQueue);
         save();
     }
 
-    public void removeGlider(Glider glider)
+    public void removeGliderQueue(GliderQueue gliderQueue)
     {
-        mGliders.remove(glider);
+        mGliderQueues.remove(gliderQueue);
         save();
     }
 
-    public List<Glider> getGliders()
+    public List<GliderQueue> getGliderQueues()
     {
-        return mGliders;
+        return mGliderQueues;
     }
 
     public int getNumberOfPilotsOnList()
@@ -170,6 +172,12 @@ public class FlyingList implements JSONSerializable
 
     public boolean isGliderOnList(Glider glider)
     {
+        for (GliderQueue gliderQueue : mGliderQueues) {
+            if (gliderQueue.getGlider() == glider) {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -186,5 +194,12 @@ public class FlyingList implements JSONSerializable
 
     public void removeGliderFromList(Glider glider)
     {
+        for (GliderQueue gliderQueue : mGliderQueues) {
+            if (gliderQueue.getGlider() == glider) {
+                removeGliderQueue(gliderQueue);
+
+                return;
+            }
+        }
     }
 }
