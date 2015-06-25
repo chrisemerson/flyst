@@ -16,7 +16,7 @@
 
     <RelativeLayout
         android:id="@+id/fragment_status_time"
-        android:layout_width="120dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/fragment_status_label_date"
         android:layout_marginRight="32dp">

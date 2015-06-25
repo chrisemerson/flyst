@@ -3,10 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/default_padding">
+    android:paddingTop="@dimen/default_padding"
+    android:paddingBottom="@dimen/default_padding"
+    android:paddingRight="@dimen/default_padding">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/default_padding">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,13 +32,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/default_padding">
         <ScrollView
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:background="@color/settings_buttons_background">
+            android:background="@color/main_background">
             <RadioGroup
-                android:id="@+id/settings_button_container"
+                android:id="@+id/glider_list_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </ScrollView>
@@ -46,6 +50,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="@dimen/default_padding"
-            android:background="@color/settings_pane_background"/>
+            android:background="@color/main_background"/>
     </LinearLayout>
 </LinearLayout>
