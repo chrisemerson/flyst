@@ -65,7 +65,7 @@ public class AddGliderDialog extends DialogFragment
 
     private void addGliderToFlyingList(Glider glider)
     {
-        getFlyingList().addGliderQueue(new GliderQueue(glider));
+        getFlyingList().addGliderQueue(new GliderQueue(getActivity().getApplicationContext(), glider));
         getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, new Intent());
         getDialog().dismiss();
     }

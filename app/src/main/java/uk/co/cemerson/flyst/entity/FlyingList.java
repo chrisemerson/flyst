@@ -20,7 +20,7 @@ public class FlyingList implements JSONSerializable
 
     private static final String JSON_KEY_FLYING_LIST_DATE = "flyinglistdate";
     private static final String JSON_KEY_PILOTS = "pilots";
-    private static final String JSON_KEY_GLIDERS = "gliders";
+    private static final String JSON_KEY_GLIDER_QUEUES = "gliderqueues";
 
     private Context mContext;
     private Date mFlyingListDate;
@@ -46,13 +46,11 @@ public class FlyingList implements JSONSerializable
                 mPilots.add(new Pilot(mContext, pilotsArray.getJSONObject(i)));
             }
 
-// TODO: Load Glider Queues
-//            JSONArray glidersArray = jsonObject.getJSONArray(JSON_KEY_GLIDERS);
-//
-//            for (int i = 0; i < glidersArray.length(); i++) {
-//                mGliderQueues.add(new GliderQueue(mContext, glidersArray.getJSONObject(i)));
-//            }
+            JSONArray gliderQueuesArray = jsonObject.getJSONArray(JSON_KEY_GLIDER_QUEUES);
 
+            for (int i = 0; i < gliderQueuesArray.length(); i++) {
+                mGliderQueues.add(new GliderQueue(mContext, mPilots, gliderQueuesArray.getJSONObject(i)));
+            }
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error decoding flying list information: ", e);
         }
@@ -66,7 +64,7 @@ public class FlyingList implements JSONSerializable
 
         jsonObject.put(JSON_KEY_FLYING_LIST_DATE, mFlyingListDate.getTime());
         jsonObject.put(JSON_KEY_PILOTS, getPilotsJSONArray());
-        jsonObject.put(JSON_KEY_GLIDERS, getGliderQueuesJSONArray());
+        jsonObject.put(JSON_KEY_GLIDER_QUEUES, getGliderQueuesJSONArray());
 
         return jsonObject;
     }
@@ -84,16 +82,13 @@ public class FlyingList implements JSONSerializable
 
     private JSONArray getGliderQueuesJSONArray() throws JSONException
     {
-        JSONArray gliders = new JSONArray();
+        JSONArray gliderQueues = new JSONArray();
 
-        //TODO: Return Glider Queues for saving
-        //Don't worry about glider queues for now until we have implemented them a bit better
+        for (GliderQueue gliderQueue : mGliderQueues) {
+            gliderQueues.put(gliderQueue.toJSON());
+        }
 
-//        for (Glider glider : mGliders) {
-//            gliders.put(glider.toJSON());
-//        }
-
-        return gliders;
+        return gliderQueues;
     }
 
     private void save()

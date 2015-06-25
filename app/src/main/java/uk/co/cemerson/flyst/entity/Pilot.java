@@ -18,7 +18,7 @@ public class Pilot implements SimpleFuzzySearchable, JSONSerializable
 {
     private static final String LOG_TAG = "uk.co.cemerson.flyst";
 
-    private static final String JSON_KEY_MEMBER = "member";
+    public static final String JSON_KEY_MEMBER = "member";
     private static final String JSON_KEY_HAS_FLOWN = "hasflown";
     private static final String JSON_KEY_NOTES = "notes";
     private static final String JSON_KEY_DATE_ADDED= "dateadded";
